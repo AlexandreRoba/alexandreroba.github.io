@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>We should prefix our interface with an I | Alexandre Roba&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="I’m currently reading the book “Clean Code A Handbook of Agile Software Craftsmanship” From Robert C. Martin and I read something that I would like to comment. In the section “Avoid Encoding” he menti">
+<meta property="og:type" content="article">
+<meta property="og:title" content="We should prefix our interface with an I">
+<meta property="og:url" content="http://alexandreroba.com/2011/07/Prefixing-Interface-with-I/index.html">
+<meta property="og:site_name" content="Alexandre Roba's Blog">
+<meta property="og:description" content="I’m currently reading the book “Clean Code A Handbook of Agile Software Craftsmanship” From Robert C. Martin and I read something that I would like to comment. In the section “Avoid Encoding” he menti">
+<meta property="og:updated_time" content="2017-01-25T10:37:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="We should prefix our interface with an I">
+<meta name="twitter:description" content="I’m currently reading the book “Clean Code A Handbook of Agile Software Craftsmanship” From Robert C. Martin and I read something that I would like to comment. In the section “Avoid Encoding” he menti">
+<meta name="twitter:creator" content="@https://twitter.com/alexandreroba">
+  
+    <link rel="alternate" href="/atom.xml" title="Alexandre Roba&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-27255613-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner">
+    <img src="/css/images/banner.jpg" style="display:none;" alt="">
+  </div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Alexandre Roba&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">One day I was born and since, I improvise.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories/videos">Videos</a>
+        
+          <a class="main-nav-link" href="/about">About me</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <a id="nav-github-link" class="nav-icon" href="https://github.com/alexandreroba"></a>
+        <a id="nav-linkedin-link" class="nav-icon" href="https://be.linkedin.com/in/alexandreroba"></a>
+        <a id="nav-twitter-link" class="nav-icon" href="https://twitter.com/alexandreroba"></a>
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://alexandreroba.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Prefixing-Interface-with-I" class="article article-type-post" itemscope
+         itemprop="blogPost">
+    <div class="article-meta">
+        <a href="/2011/07/Prefixing-Interface-with-I/" class="article-date">
+  <time datetime="2011-07-27T19:20:25.000Z" itemprop="datePublished">2011-07-27</time>
+</a>
+        
+    </div>
+    <div class="article-inner">
+        
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      We should prefix our interface with an I
+    </h1>
+  
+
+        </header>
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+            <p>I’m currently reading the book “Clean Code A Handbook of Agile Software Craftsmanship” From Robert C. Martin and I read something that I would like to comment. In the section “Avoid Encoding” he mention the prefixing with an “I” the interface that should be avoided. Instead we should use, if needed, a suffix “imp” for the implementation class.</p>
+<p>This is a convention which is quite used in the Java world. I’ve downloaded a couple of open source framework in Java just to read their code source and I’ve found that convention used on a lot of them and I do not like it much. I prefer to use the I on the interface. Why? Cause the only unique element in an interface and the class implementing it, is the interface. Imagine the example provided in the book.It gives ShopFactory for the interface and ShopFactoryImp for the implementation but what about another factory implementing the interface. a Mock for example. It will be called ShopFactoryMockImp? What if they implement multiple interface?… I don’t think so. We should call the interface IShopFactory and all the class implementing it may not have to reference the interface name in their names. This is cleaner and makes more sense.</p>
+<p>The real question is should we use any prefix on the interface? And again… I believe so. Why When I’m browsing the solution files I like to see in the names what are the interfaces and what are the classes. Same thing when looking at the code, I like to know what is the base class and what are the interfaces amongst the inherited base class if any and the implemented interfaces.</p>
+<p>I hope this comment will help you make your own opinion.</p>
+
+            
+        </div>
+        <footer class="article-footer">
+            <a data-url="http://alexandreroba.com/2011/07/Prefixing-Interface-with-I/" data-id="ciyctm92m000dh5hcbfh6fsp1"
+               class="article-share-link">Share</a>
+            
+            <a href="http://alexandreroba.com/2011/07/Prefixing-Interface-with-I/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NET/">.NET</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C#</a></li></ul>
+
+        </footer>
+        
+        <section id="comments">
+            <div id="disqus_thread">
+                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by
+                        Disqus.</a></noscript>
+            </div>
+        </section>
+        
+    </div>
+    
+    
+<nav id="article-nav">
+  
+    <a href="/2011/07/Why-an-entity-key-should-not-be-a-technical-id/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Why an entity key should not be a technical id?
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+    
+</article>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/videos/">videos</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/NET/">.NET</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Application-Design/">Application Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/COM/">COM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ExpressJs/">ExpressJs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/General/">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NodeJs/">NodeJs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Powershell/">Powershell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SOA/">SOA</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/NET/" style="font-size: 20px;">.NET</a> <a href="/tags/Application-Design/" style="font-size: 12.5px;">Application Design</a> <a href="/tags/Architecture/" style="font-size: 10px;">Architecture</a> <a href="/tags/C/" style="font-size: 17.5px;">C#</a> <a href="/tags/COM/" style="font-size: 10px;">COM</a> <a href="/tags/ExpressJs/" style="font-size: 10px;">ExpressJs</a> <a href="/tags/General/" style="font-size: 15px;">General</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/NodeJs/" style="font-size: 10px;">NodeJs</a> <a href="/tags/Powershell/" style="font-size: 10px;">Powershell</a> <a href="/tags/SOA/" style="font-size: 10px;">SOA</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/05/">May 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/03/">March 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/10/The-Ultimate-list-of-developer-Podcasts-from-SimpleProgrammer/">The Ultimate list of developer Podcasts from SimpleProgrammer</a>
+          </li>
+        
+          <li>
+            <a href="/2014/09/Powershell-for-developers-French/">Powershell for developers [French]</a>
+          </li>
+        
+          <li>
+            <a href="/2014/01/Implementing-a-flash-middleware-on-expressjs-3x/">Implementing a flash middleware on express.js 3.x</a>
+          </li>
+        
+          <li>
+            <a href="/2014/01/The-yield-keyword-demistified/">The yield keyword demystified</a>
+          </li>
+        
+          <li>
+            <a href="/2012/10/GAC-deployment-versus-bin-deployment-and-security-patches/">GAC Deployment versus BIN Deployment and security patches</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Alexandre Roba<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories/videos" class="mobile-nav-link">Videos</a>
+  
+    <a href="/about" class="mobile-nav-link">About me</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'alexandreroba';
+  
+  var disqus_url = 'http://alexandreroba.com/2011/07/Prefixing-Interface-with-I/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Why an entity key should not be a technical id? | Alexandre Roba&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Like most of application architect out there that I have meet, I used to add a primary key column to every table I added to the ER Model I was working on. It was like a reflex: I create a customer tab">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Why an entity key should not be a technical id?">
+<meta property="og:url" content="http://alexandreroba.com/2011/07/Why-an-entity-key-should-not-be-a-technical-id/index.html">
+<meta property="og:site_name" content="Alexandre Roba's Blog">
+<meta property="og:description" content="Like most of application architect out there that I have meet, I used to add a primary key column to every table I added to the ER Model I was working on. It was like a reflex: I create a customer tab">
+<meta property="og:updated_time" content="2017-01-25T10:37:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Why an entity key should not be a technical id?">
+<meta name="twitter:description" content="Like most of application architect out there that I have meet, I used to add a primary key column to every table I added to the ER Model I was working on. It was like a reflex: I create a customer tab">
+<meta name="twitter:creator" content="@https://twitter.com/alexandreroba">
+  
+    <link rel="alternate" href="/atom.xml" title="Alexandre Roba&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-27255613-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner">
+    <img src="/css/images/banner.jpg" style="display:none;" alt="">
+  </div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Alexandre Roba&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">One day I was born and since, I improvise.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories/videos">Videos</a>
+        
+          <a class="main-nav-link" href="/about">About me</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <a id="nav-github-link" class="nav-icon" href="https://github.com/alexandreroba"></a>
+        <a id="nav-linkedin-link" class="nav-icon" href="https://be.linkedin.com/in/alexandreroba"></a>
+        <a id="nav-twitter-link" class="nav-icon" href="https://twitter.com/alexandreroba"></a>
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://alexandreroba.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Why-an-entity-key-should-not-be-a-technical-id" class="article article-type-post" itemscope
+         itemprop="blogPost">
+    <div class="article-meta">
+        <a href="/2011/07/Why-an-entity-key-should-not-be-a-technical-id/" class="article-date">
+  <time datetime="2011-07-28T19:20:25.000Z" itemprop="datePublished">2011-07-28</time>
+</a>
+        
+    </div>
+    <div class="article-inner">
+        
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      Why an entity key should not be a technical id?
+    </h1>
+  
+
+        </header>
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+            <p>Like most of application architect out there that I have meet, I used to add a primary key column to every table I added to the ER Model I was working on. It was like a reflex: I create a customer table then I add a column “Pkid” of type int. The values of that column will be given by the RDBMS.</p>
+<p>That column had no meaning but the one of giving me a unique value for the table record. That table record was then linked one to one to my business entity. It was fine by that time. But… Then came distributed and loosely coupled systems. The instance of that entity may not be created centrally anymore. It may be created on a disconnected device and referenced by another disconnected instance. This is becoming more difficult to handle.</p>
+<p>It is not impossible but more complex. The disconnected system will have to provide a temporary key and used it as the FK value by the referencing entity. Then after posting the entity to the entity owner systems, it will have to update those temporary key with the final values provided by this owner system…. Fine!!! It works… But… My central system may have been sized to support a well defined number of users and the processing of those entities creation request may be pooled… Meaning I do not get the finale Id right after the posting and I may get entities that were created on other disconnected systems. Those new ones may have used as Id the same value that I used… Oups… Trouble again…</p>
+<p>Well you may go further and find a good solution for it but at what cost… My advice is to not use a RDBMS primary column as your entity key. You could do it on the RDBMS but this key should not be used outside your RDBMS. You should have a candidate key for which every external system is capable of creating new and unique key. Ideally a real business key or if that is not possible, a Unique identifier like a Guid.</p>
+<p>This will save you a major headache when you will go from that centrally managed system to a distributed and lossely coupled system. Trust me.</p>
+
+            
+        </div>
+        <footer class="article-footer">
+            <a data-url="http://alexandreroba.com/2011/07/Why-an-entity-key-should-not-be-a-technical-id/" data-id="ciyctm92t000nh5hc7214ymam"
+               class="article-share-link">Share</a>
+            
+            <a href="http://alexandreroba.com/2011/07/Why-an-entity-key-should-not-be-a-technical-id/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Application-Design/">Application Design</a></li></ul>
+
+        </footer>
+        
+        <section id="comments">
+            <div id="disqus_thread">
+                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by
+                        Disqus.</a></noscript>
+            </div>
+        </section>
+        
+    </div>
+    
+    
+<nav id="article-nav">
+  
+    <a href="/2011/08/SOA-Patterns-entity-linking/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          SOA Patterns Entity Linking
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2011/07/Prefixing-Interface-with-I/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">We should prefix our interface with an I</div>
+    </a>
+  
+</nav>
+
+    
+</article>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/videos/">videos</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/NET/">.NET</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Application-Design/">Application Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/COM/">COM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ExpressJs/">ExpressJs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/General/">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NodeJs/">NodeJs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Powershell/">Powershell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SOA/">SOA</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/NET/" style="font-size: 20px;">.NET</a> <a href="/tags/Application-Design/" style="font-size: 12.5px;">Application Design</a> <a href="/tags/Architecture/" style="font-size: 10px;">Architecture</a> <a href="/tags/C/" style="font-size: 17.5px;">C#</a> <a href="/tags/COM/" style="font-size: 10px;">COM</a> <a href="/tags/ExpressJs/" style="font-size: 10px;">ExpressJs</a> <a href="/tags/General/" style="font-size: 15px;">General</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/NodeJs/" style="font-size: 10px;">NodeJs</a> <a href="/tags/Powershell/" style="font-size: 10px;">Powershell</a> <a href="/tags/SOA/" style="font-size: 10px;">SOA</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/05/">May 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/03/">March 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/10/The-Ultimate-list-of-developer-Podcasts-from-SimpleProgrammer/">The Ultimate list of developer Podcasts from SimpleProgrammer</a>
+          </li>
+        
+          <li>
+            <a href="/2014/09/Powershell-for-developers-French/">Powershell for developers [French]</a>
+          </li>
+        
+          <li>
+            <a href="/2014/01/Implementing-a-flash-middleware-on-expressjs-3x/">Implementing a flash middleware on express.js 3.x</a>
+          </li>
+        
+          <li>
+            <a href="/2014/01/The-yield-keyword-demistified/">The yield keyword demystified</a>
+          </li>
+        
+          <li>
+            <a href="/2012/10/GAC-deployment-versus-bin-deployment-and-security-patches/">GAC Deployment versus BIN Deployment and security patches</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Alexandre Roba<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories/videos" class="mobile-nav-link">Videos</a>
+  
+    <a href="/about" class="mobile-nav-link">About me</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'alexandreroba';
+  
+  var disqus_url = 'http://alexandreroba.com/2011/07/Why-an-entity-key-should-not-be-a-technical-id/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

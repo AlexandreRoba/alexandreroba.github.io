@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Structural domain entities or context oriented domain entities? | Alexandre Roba&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="I’m working on a project that has been going on for couple of years now. We manage to deliver a solid and nice application composed of several building blocks. Those blocks  go from front end web appl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Structural domain entities or context oriented domain entities?">
+<meta property="og:url" content="http://alexandreroba.com/2011/10/Structural-domain-entities-or-context-oriented-domain-entities/index.html">
+<meta property="og:site_name" content="Alexandre Roba's Blog">
+<meta property="og:description" content="I’m working on a project that has been going on for couple of years now. We manage to deliver a solid and nice application composed of several building blocks. Those blocks  go from front end web appl">
+<meta property="og:updated_time" content="2017-01-25T10:37:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Structural domain entities or context oriented domain entities?">
+<meta name="twitter:description" content="I’m working on a project that has been going on for couple of years now. We manage to deliver a solid and nice application composed of several building blocks. Those blocks  go from front end web appl">
+<meta name="twitter:creator" content="@https://twitter.com/alexandreroba">
+  
+    <link rel="alternate" href="/atom.xml" title="Alexandre Roba&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-27255613-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner">
+    <img src="/css/images/banner.jpg" style="display:none;" alt="">
+  </div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Alexandre Roba&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">One day I was born and since, I improvise.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories/videos">Videos</a>
+        
+          <a class="main-nav-link" href="/about">About me</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <a id="nav-github-link" class="nav-icon" href="https://github.com/alexandreroba"></a>
+        <a id="nav-linkedin-link" class="nav-icon" href="https://be.linkedin.com/in/alexandreroba"></a>
+        <a id="nav-twitter-link" class="nav-icon" href="https://twitter.com/alexandreroba"></a>
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://alexandreroba.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Structural-domain-entities-or-context-oriented-domain-entities" class="article article-type-post" itemscope
+         itemprop="blogPost">
+    <div class="article-meta">
+        <a href="/2011/10/Structural-domain-entities-or-context-oriented-domain-entities/" class="article-date">
+  <time datetime="2011-10-26T19:20:25.000Z" itemprop="datePublished">2011-10-26</time>
+</a>
+        
+    </div>
+    <div class="article-inner">
+        
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      Structural domain entities or context oriented domain entities?
+    </h1>
+  
+
+        </header>
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+            <p>I’m working on a project that has been going on for couple of years now. We manage to deliver a solid and nice application composed of several building blocks. Those blocks  go from front end web application to mobile disconnected application all serviced by Web services components.</p>
+<p>This web service components are build on top of a DDD Architecture. The challenges we are facing now is that our Domain entities were design based on a structural approach and our domain entities becomes quite complex. For example we have a project aggregate root made of work package entities and them self made of activity entities.</p>
+<p>At the begining of project we had only a limited kind of project and activity type. The scope of the solution is constantly increasing and we are now having far more type of project and activities. Those domain entities become bigger and we have a lot behaviour which are partially overlapping each other and it is hard now to change one type specific behaviour without impacting the other inherited.</p>
+<p>In my quest to make all those complex entities more manageable and less interdependent. I’m trying to restructure them in bounded context and to organize them in context oriented entities. Meaning I’m trying to build entities which are meant to support some dedicated context and processes. Instead of having a domain entity model that looks like my database model. Their are now behavioural oriented not structural oriented.</p>
+<p>By doing this I’m ending up with far more aggregate roots but which are simplier and more maintainable. The repository are also now more complex as well. Before we had almost a one to one relation between a domain entity and the database model. It is not the case any more. We may end up by reading five different table to build a simple domain entity. I can live with that after all this is what the repository is there for. Serialiaze and deserialiez my domain entities.</p>
+<p>The major issue i still have to face now is the resistance of the development team to work this way. They have the feeling that we will end up by duplicating a lot of business rules. I tried to show them and explain them that if a business rules needs to be duplicated they we might have to refactor the bounded context cause they might not be that bounded… But that did not do the trick :(</p>
+<p>Has anyone gone throug the same experience? I would appreciate any advice on this.</p>
+
+            
+        </div>
+        <footer class="article-footer">
+            <a data-url="http://alexandreroba.com/2011/10/Structural-domain-entities-or-context-oriented-domain-entities/" data-id="ciyctm92n000eh5hc0hfm5m6r"
+               class="article-share-link">Share</a>
+            
+            <a href="http://alexandreroba.com/2011/10/Structural-domain-entities-or-context-oriented-domain-entities/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Application-Design/">Application Design</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Architecture/">Architecture</a></li></ul>
+
+        </footer>
+        
+        <section id="comments">
+            <div id="disqus_thread">
+                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by
+                        Disqus.</a></noscript>
+            </div>
+        </section>
+        
+    </div>
+    
+    
+<nav id="article-nav">
+  
+    <a href="/2012/03/When-not-asking-the-right-question-can-lead-to-stupid-answer/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          When not asking the right question can lead to stupid answer
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2011/08/SOA-Patterns-entity-linking/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">SOA Patterns Entity Linking</div>
+    </a>
+  
+</nav>
+
+    
+</article>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/videos/">videos</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/NET/">.NET</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Application-Design/">Application Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/COM/">COM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ExpressJs/">ExpressJs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/General/">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NodeJs/">NodeJs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Powershell/">Powershell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SOA/">SOA</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/NET/" style="font-size: 20px;">.NET</a> <a href="/tags/Application-Design/" style="font-size: 12.5px;">Application Design</a> <a href="/tags/Architecture/" style="font-size: 10px;">Architecture</a> <a href="/tags/C/" style="font-size: 17.5px;">C#</a> <a href="/tags/COM/" style="font-size: 10px;">COM</a> <a href="/tags/ExpressJs/" style="font-size: 10px;">ExpressJs</a> <a href="/tags/General/" style="font-size: 15px;">General</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/NodeJs/" style="font-size: 10px;">NodeJs</a> <a href="/tags/Powershell/" style="font-size: 10px;">Powershell</a> <a href="/tags/SOA/" style="font-size: 10px;">SOA</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/05/">May 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/03/">March 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/10/The-Ultimate-list-of-developer-Podcasts-from-SimpleProgrammer/">The Ultimate list of developer Podcasts from SimpleProgrammer</a>
+          </li>
+        
+          <li>
+            <a href="/2014/09/Powershell-for-developers-French/">Powershell for developers [French]</a>
+          </li>
+        
+          <li>
+            <a href="/2014/01/Implementing-a-flash-middleware-on-expressjs-3x/">Implementing a flash middleware on express.js 3.x</a>
+          </li>
+        
+          <li>
+            <a href="/2014/01/The-yield-keyword-demistified/">The yield keyword demystified</a>
+          </li>
+        
+          <li>
+            <a href="/2012/10/GAC-deployment-versus-bin-deployment-and-security-patches/">GAC Deployment versus BIN Deployment and security patches</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Alexandre Roba<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories/videos" class="mobile-nav-link">Videos</a>
+  
+    <a href="/about" class="mobile-nav-link">About me</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'alexandreroba';
+  
+  var disqus_url = 'http://alexandreroba.com/2011/10/Structural-domain-entities-or-context-oriented-domain-entities/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

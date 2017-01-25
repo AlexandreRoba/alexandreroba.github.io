@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>The yield keyword demystified | Alexandre Roba&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="I had recently a discussion with a younger developper in C# that was asking question about the usage of the yield keyword.He was saying he never used and though it was useless. He then confessed me it">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The yield keyword demystified">
+<meta property="og:url" content="http://alexandreroba.com/2014/01/The-yield-keyword-demistified/index.html">
+<meta property="og:site_name" content="Alexandre Roba's Blog">
+<meta property="og:description" content="I had recently a discussion with a younger developper in C# that was asking question about the usage of the yield keyword.He was saying he never used and though it was useless. He then confessed me it">
+<meta property="og:image" content="http://alexandreroba.com/images/The-yield-keyword-demystified/20140111-capture01.png">
+<meta property="og:image" content="http://alexandreroba.com/images/The-yield-keyword-demystified/20140111-capture02.png">
+<meta property="og:updated_time" content="2017-01-25T10:37:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="The yield keyword demystified">
+<meta name="twitter:description" content="I had recently a discussion with a younger developper in C# that was asking question about the usage of the yield keyword.He was saying he never used and though it was useless. He then confessed me it">
+<meta name="twitter:image" content="http://alexandreroba.com/images/The-yield-keyword-demystified/20140111-capture01.png">
+<meta name="twitter:creator" content="@https://twitter.com/alexandreroba">
+  
+    <link rel="alternate" href="/atom.xml" title="Alexandre Roba&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-27255613-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner">
+    <img src="/css/images/banner.jpg" style="display:none;" alt="">
+  </div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Alexandre Roba&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">One day I was born and since, I improvise.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories/videos">Videos</a>
+        
+          <a class="main-nav-link" href="/about">About me</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <a id="nav-github-link" class="nav-icon" href="https://github.com/alexandreroba"></a>
+        <a id="nav-linkedin-link" class="nav-icon" href="https://be.linkedin.com/in/alexandreroba"></a>
+        <a id="nav-twitter-link" class="nav-icon" href="https://twitter.com/alexandreroba"></a>
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://alexandreroba.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-The-yield-keyword-demistified" class="article article-type-post" itemscope
+         itemprop="blogPost">
+    <div class="article-meta">
+        <a href="/2014/01/The-yield-keyword-demistified/" class="article-date">
+  <time datetime="2014-01-11T20:20:25.000Z" itemprop="datePublished">2014-01-11</time>
+</a>
+        
+    </div>
+    <div class="article-inner">
+        
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      The yield keyword demystified
+    </h1>
+  
+
+        </header>
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+            <p>I had recently a discussion with a younger developper in C# that was asking question about the usage of the yield keyword.<br>He was saying he never used and though it was useless. He then confessed me it didn’t really understood wath the keyword was exactly about.<br>I tryed to explain him what it does and this the material I would have used it if I had it at that time.<br>I will try with this post to explain what “yield” is all about with simple but concrete examples.</p>
+<h2 id="First-thing-first-Where-can-we-use-it"><a href="#First-thing-first-Where-can-we-use-it" class="headerlink" title="First thing first. Where can we use it?"></a>First thing first. Where can we use it?</h2><p>It should be used in a function that returns an instance that implement IEnumerable or and IEnumerable&lt;&gt; interfaces.<br>The function must return explicitely one onf those interfaces like the two following functions:</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> IEnumerable <span class="title">GetIntegers1</span>(<span class="params"></span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">yield</span> <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">yield</span> <span class="keyword">return</span> <span class="number">2</span>;</div><div class="line">    <span class="keyword">yield</span> <span class="keyword">return</span> <span class="number">3</span>;</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">public</span> IEnumerable&lt;<span class="keyword">int</span>&gt; <span class="title">GetIntegers2</span>(<span class="params"></span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">yield</span> <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">yield</span> <span class="keyword">return</span> <span class="number">2</span>;</div><div class="line">    <span class="keyword">yield</span> <span class="keyword">return</span> <span class="number">3</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>By returning the IEnumerable interfaces those functions become iteratable and can now be used directly from the foreach loop like:</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">foreach</span> (<span class="function"><span class="keyword">var</span> i <span class="keyword">in</span> <span class="title">GetIntegers1</span>(<span class="params"></span>))</span></div><div class="line">&#123;</div><div class="line">    Console.WriteLine(i.ToString());</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="keyword">foreach</span> (<span class="function"><span class="keyword">int</span> i <span class="keyword">in</span> <span class="title">GetIntegers2</span>(<span class="params"></span>))</span></div><div class="line">&#123;</div><div class="line">    Console.WriteLine(i.ToString());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Ok-but-why-using-it"><a href="#Ok-but-why-using-it" class="headerlink" title="Ok but why using it?"></a>Ok but why using it?</h2><p>What is the difference between those two functions and this one?</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> IEnumerable <span class="title">GetIntegers1</span>(<span class="params"></span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> List&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>It might not be obvious at first sight as the result is identical but the execution flow is different.<br>Basically if you debug the program execution you will see the following for the returned list</p>
+<ol>
+<li>Enter the foreach loop</li>
+<li>Call the GetIntegers ONCE</li>
+<li>Write the first number</li>
+<li>Write the second number</li>
+<li>Write the third line</li>
+</ol>
+<p>And you will see the following when using the yield return</p>
+<ol>
+<li>Enter the foreach loop</li>
+<li>Call the GetIntegers but leave at the first return</li>
+<li>Write the first number</li>
+<li>Call the GetIntegers but start at the second return and leave just after</li>
+<li>Write the second number</li>
+<li>Call the GetIntegers but start at the third return and leave just after</li>
+<li>Write the third line</li>
+</ol>
+<p>That is all. It simply changes the execution flow and allow you to handle each element of the list one by one before the next element is called.</p>
+<h2 id="Fantastic-but-is-this-magic"><a href="#Fantastic-but-is-this-magic" class="headerlink" title="Fantastic! but is this magic?"></a>Fantastic! but is this magic?</h2><p>No it is not. You could have achieve the same result by having implemented yourself the iterator pattern using the interface IEnumerable and IEnumerator and building a dedicated class to handle this like the following code (for simplicity I will only implement IEnumerable but IEnumerable&lt;&gt; could have been implemented as well):</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">public class IterableList : IEnumerable, IEnumerator</div><div class="line">&#123;</div><div class="line">    public List numbers;</div><div class="line">    public int index;</div><div class="line"> </div><div class="line">    public IterableList()</div><div class="line">    &#123;</div><div class="line">        numbers = new List();</div><div class="line">        int index = 0;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    public IterableList(IEnumerable inputlist): this()</div><div class="line">    &#123;</div><div class="line">        foreach (var i in inputlist)</div><div class="line">        numbers.Add(i);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    public IEnumerator GetEnumerator()</div><div class="line">    &#123;</div><div class="line">        return this;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    public bool MoveNext()</div><div class="line">    &#123;</div><div class="line">        index++;</div><div class="line">        if (index &gt; numbers.Count)</div><div class="line">            return false;</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    public void Reset()</div><div class="line">    &#123;</div><div class="line">        index = 0;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    public object Current</div><div class="line">    &#123;</div><div class="line">        get</div><div class="line">        &#123;</div><div class="line">            if (index == 0)</div><div class="line">                return 0;</div><div class="line">            return numbers[index - 1];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>And then define a function:</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> IterableList <span class="title">GetIntegers3</span>(<span class="params"></span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> IterableList(<span class="keyword">new</span> List&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Both of the code generated by the compiler will look very similar.<br>This can be confirmed by looking at the IL code generated by both of our implementation.<br>We can see that when using yield an extra class is generated for us that implements IEnumerable and IEnumerator (and their generic version).</p>
+<p><img src="/images/The-yield-keyword-demystified/20140111-capture01.png" alt="IL Code for yield"></p>
+<p>The Iterable class we have written will look mostly the same (But for the generic versions that we have not implemented)</p>
+<p><img src="/images/The-yield-keyword-demystified/20140111-capture02.png" alt="IL Code for generic"></p>
+<h2 id="To-summarize"><a href="#To-summarize" class="headerlink" title="To summarize!"></a>To summarize!</h2><p>Basically using the yield will allow us to have the control over the way the items in our IEnumerable result items and their processing happens. And no magic behind.<br>It is simply an helper that will generate the code for you.</p>
+
+            
+        </div>
+        <footer class="article-footer">
+            <a data-url="http://alexandreroba.com/2014/01/The-yield-keyword-demistified/" data-id="ciyctm92t000lh5hc0912gj5j"
+               class="article-share-link">Share</a>
+            
+            <a href="http://alexandreroba.com/2014/01/The-yield-keyword-demistified/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NET/">.NET</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C#</a></li></ul>
+
+        </footer>
+        
+        <section id="comments">
+            <div id="disqus_thread">
+                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by
+                        Disqus.</a></noscript>
+            </div>
+        </section>
+        
+    </div>
+    
+    
+<nav id="article-nav">
+  
+    <a href="/2014/01/Implementing-a-flash-middleware-on-expressjs-3x/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Implementing a flash middleware on express.js 3.x
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2012/10/GAC-deployment-versus-bin-deployment-and-security-patches/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">GAC Deployment versus BIN Deployment and security patches</div>
+    </a>
+  
+</nav>
+
+    
+</article>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/videos/">videos</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/NET/">.NET</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Application-Design/">Application Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/COM/">COM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ExpressJs/">ExpressJs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/General/">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NodeJs/">NodeJs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Powershell/">Powershell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SOA/">SOA</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/NET/" style="font-size: 20px;">.NET</a> <a href="/tags/Application-Design/" style="font-size: 12.5px;">Application Design</a> <a href="/tags/Architecture/" style="font-size: 10px;">Architecture</a> <a href="/tags/C/" style="font-size: 17.5px;">C#</a> <a href="/tags/COM/" style="font-size: 10px;">COM</a> <a href="/tags/ExpressJs/" style="font-size: 10px;">ExpressJs</a> <a href="/tags/General/" style="font-size: 15px;">General</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/NodeJs/" style="font-size: 10px;">NodeJs</a> <a href="/tags/Powershell/" style="font-size: 10px;">Powershell</a> <a href="/tags/SOA/" style="font-size: 10px;">SOA</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/05/">May 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/03/">March 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/10/The-Ultimate-list-of-developer-Podcasts-from-SimpleProgrammer/">The Ultimate list of developer Podcasts from SimpleProgrammer</a>
+          </li>
+        
+          <li>
+            <a href="/2014/09/Powershell-for-developers-French/">Powershell for developers [French]</a>
+          </li>
+        
+          <li>
+            <a href="/2014/01/Implementing-a-flash-middleware-on-expressjs-3x/">Implementing a flash middleware on express.js 3.x</a>
+          </li>
+        
+          <li>
+            <a href="/2014/01/The-yield-keyword-demistified/">The yield keyword demystified</a>
+          </li>
+        
+          <li>
+            <a href="/2012/10/GAC-deployment-versus-bin-deployment-and-security-patches/">GAC Deployment versus BIN Deployment and security patches</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Alexandre Roba<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories/videos" class="mobile-nav-link">Videos</a>
+  
+    <a href="/about" class="mobile-nav-link">About me</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'alexandreroba';
+  
+  var disqus_url = 'http://alexandreroba.com/2014/01/The-yield-keyword-demistified/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Alexandre Roba&#39;s Blog</title>
+  <subtitle>One day I was born and since, I improvise.</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://alexandreroba.com/"/>
+  <updated>2017-01-25T10:37:01.000Z</updated>
+  <id>http://alexandreroba.com/</id>
+  
+  <author>
+    <name>Alexandre Roba</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>The Ultimate list of developer Podcasts from SimpleProgrammer</title>
+    <link href="http://alexandreroba.com/2016/10/The-Ultimate-list-of-developer-Podcasts-from-SimpleProgrammer/"/>
+    <id>http://alexandreroba.com/2016/10/The-Ultimate-list-of-developer-Podcasts-from-SimpleProgrammer/</id>
+    <published>2016-10-28T06:27:16.000Z</published>
+    <updated>2017-01-25T10:37:01.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>John Sonmez from <a href="https://simpleprogrammer.com" target="_blank" rel="external">SimpleProgrammer.com</a> published yesterday a huge list of developer PodCasts. </p>
+<p>The list is organized by categories such as:</p>
+<ul>
+<li>General Interest to Software Developers</li>
+<li>.Net and Microsoft Related</li>
+<li>Mobile Development</li>
+<li>Javascript and Web</li>
+<li>Game Development</li>
+<li>Freelancing</li>
+<li>Entrepreneurial / Bootstrapped</li>
+<li>Python</li>
+<li>PHP</li>
+<li>Ruby</li>
+<li>C++</li>
+<li>Java and JVM Languages</li>
+<li>Miscellaneous Languages</li>
+<li>Data and Machine Learning</li>
+<li>Agile / Scrum</li>
+<li>DevOps</li>
+<li>Cloud</li>
+<li>SQL and Databases</li>
+</ul>
+<p>A pretty impressive list John!</p>
+<p>The list can be found at <a href="https://simpleprogrammer.com/2014/03/10/ultimate-list-developer-podcasts/?utm_source=drip&amp;utm_medium=email&amp;utm_campaign=ultimate-list-of-developer-podcasts-updated" target="_blank" rel="external">The ultimate list of developer PodCasts</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;John Sonmez from &lt;a href=&quot;https://simpleprogrammer.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;SimpleProgrammer.com&lt;/a&gt; published yesterday a hug
+    
+    </summary>
+    
+    
+      <category term="General" scheme="http://alexandreroba.com/tags/General/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Powershell for developers [French]</title>
+    <link href="http://alexandreroba.com/2014/09/Powershell-for-developers-French/"/>
+    <id>http://alexandreroba.com/2014/09/Powershell-for-developers-French/</id>
+    <published>2014-09-27T16:12:37.000Z</published>
+    <updated>2017-01-25T10:37:01.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>This video gives a brief introduction to PowerShell. It provides a (hopefully) valuable set of advices and commands that can be used by every developers while performing their day 2 day development activities on windows with PowerShell.</p>
+<iframe width="420" height="315" src="http://www.youtube.com/embed/ppaqiNZbBA4" frameborder="0" allowfullscreen></iframe>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;This video gives a brief introduction to PowerShell. It provides a (hopefully) valuable set of advices and commands that can be used by e
+    
+    </summary>
+    
+      <category term="videos" scheme="http://alexandreroba.com/categories/videos/"/>
+    
+    
+      <category term=".NET" scheme="http://alexandreroba.com/tags/NET/"/>
+    
+      <category term="Powershell" scheme="http://alexandreroba.com/tags/Powershell/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Implementing a flash middleware on express.js 3.x</title>
+    <link href="http://alexandreroba.com/2014/01/Implementing-a-flash-middleware-on-expressjs-3x/"/>
+    <id>http://alexandreroba.com/2014/01/Implementing-a-flash-middleware-on-expressjs-3x/</id>
+    <published>2014-01-22T20:20:25.000Z</published>
+    <updated>2017-01-25T10:37:01.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>I’m currently following the Pluralsight training <a href="http://www.pluralsight.com/training/Courses/TableOfContents/full-stack-nodejs" target="_blank" rel="external">Full Stack Node.js</a>. The course was release more than a year ago and it is based on express.js 2.x.<br>I have chosen to build the course sample on express 3.x and because of this some features described on the course are no more applicable.<br>The purpose of this blog post is to actually demonstrate how to migrate properly one of the them: “The Flashing”.</p>
+<p>Simply put, the flashing consist of displaying a status message once an operation executed on a post has completed.<br>The Flashing is particularly useful when using the <a href="http://en.wikipedia.org/wiki/Post/Redirect/Get" target="_blank" rel="external">Post/Redirect/Get Pattern</a>. The all scenario can be described as:</p>
+<ol>
+<li>The user submit a form with a POST action</li>
+<li>The user form is process and a result status is generated such as “Error” or “Success”</li>
+<li>The Post action completes with a redirect that will tell the client browser to GET another page.</li>
+<li>The rendering of the get result should display the processing status</li>
+</ol>
+<p>I found several questions on stackexchange explaining how to do that but none of them was clear enough for me to understand…<br>So I digged a bit and I decide to share my findings here.</p>
+<p>The original solution was using app.dynamicHelpers which is not applicable anymore.<br>The <a href="https://github.com/visionmedia/express/wiki/Migrating-from-2.x-to-3.x" target="_blank" rel="external">migration document from express 2.x to 3.x</a> just says replace with:</p>
+<p>middleware and res.locals…</p>
+<p>Fine… How am I suppose to do that? Well I believe the answer is incomplete.</p>
+<p>You will use the middleware to add processing into the handling of your request and its response.<br>After all this is why the middleware is there for. Then in the <strong>middleware</strong> you will attach a function that can be used in the route handler.<br>This function will use <strong>res.locals</strong> to attach something to your response that can be used on the rendering of the view. This is incomplete…<br>or at least this how I understood it and it felt incomplete.</p>
+<p>Our problem here is that we are using the Post/Redirect/Pattern and this means that all data attach to the res.locals vanish as soon as you do a redirect.<br>The redirect will instruct the browser to perform a GET and this will start the request from the processing of the HTTP request from the beginning.<br>There is no way to solve our issue just with a middleware and res.locals!!! We need a way to pass information from the POST and REDIRECT to the following GET.<br>The only to do this is via a cookie or in the session. But those will then need to be cleaned once the status message has been displayed.</p>
+<p>This is how I have achieved this. First I have implemented the middleware and it looks like this:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="meta">"use strict"</span>;</div><div class="line"> </div><div class="line"><span class="keyword">var</span> currentRes;</div><div class="line"><span class="keyword">var</span> currentReq;</div><div class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">        <span class="comment">//We save the response and request reference has we will need it later</span></div><div class="line">        currentRes = res;</div><div class="line">        currentReq = req;</div><div class="line">        <span class="comment">//We attach the flash function to be used from the route handler</span></div><div class="line">        req.flash = _flash;</div><div class="line">        <span class="comment">//We read the status from the session if it is there and we remove it</span></div><div class="line">        _flash();</div><div class="line">        next();</div><div class="line">    &#125;;</div><div class="line">&#125;;</div><div class="line"> </div><div class="line"><span class="keyword">var</span> _flash = <span class="function"><span class="keyword">function</span>(<span class="params">type,message</span>)</span>&#123;</div><div class="line">    <span class="comment">//We need a session if there is none... Then we raise an exception</span></div><div class="line">    <span class="keyword">if</span> (currentReq.session === <span class="literal">undefined</span>) &#123;</div><div class="line">        <span class="keyword">throw</span> <span class="built_in">Error</span>(<span class="string">'req.flash() requires sessions'</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//This the usage from the route handler. This will store the status message in the POST processing</span></div><div class="line">    <span class="keyword">if</span>(type &amp;&amp; message)&#123;</div><div class="line">        currentReq.session.flash = &#123;<span class="attr">flashType</span>:type,<span class="attr">flashMessage</span>:message&#125;;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="comment">//If no parameter are passed then we read the eventual value saved on the session and we attach it to res.locals for the rendering</span></div><div class="line">        <span class="keyword">if</span> (currentReq.session.flash)&#123;</div><div class="line">            <span class="keyword">var</span> flashObj = currentReq.session.flash;</div><div class="line">            currentRes.locals.flashTypes = [<span class="string">'info'</span>,<span class="string">'error'</span>];</div><div class="line">            currentRes.locals.flash = &#123;&#125;;</div><div class="line">            currentRes.locals.flash[flashObj.flashType] =flashObj.flashMessage;</div><div class="line">            <span class="keyword">delete</span> currentReq.session[<span class="string">'flash'</span>];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>The middleware will need to be added to your app express instance as usual.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> flash = <span class="built_in">require</span>(<span class="string">'./middleware/flash'</span>);</div><div class="line"> </div><div class="line"><span class="keyword">var</span> app = <span class="built_in">module</span>.exports= express();</div><div class="line"> </div><div class="line">app.configure(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    app.set(<span class="string">'port'</span>, process.env.PORT || <span class="number">3000</span>);</div><div class="line">    app.set(<span class="string">'views'</span>, path.join(__dirname, <span class="string">'views'</span>));</div><div class="line">    app.set(<span class="string">'view engine'</span>, <span class="string">'jade'</span>);</div><div class="line">    app.use(express.favicon());</div><div class="line">    app.use(express.logger(<span class="string">'dev'</span>));</div><div class="line">    app.use(express.json());</div><div class="line">    app.use(express.urlencoded());</div><div class="line">    app.use(express.methodOverride());</div><div class="line">    app.use(express.cookieParser());</div><div class="line">    app.use(express.session(&#123;</div><div class="line">        <span class="attr">secret</span>:<span class="string">"mysupersecrethash"</span>,</div><div class="line">        <span class="attr">store</span>: <span class="keyword">new</span> RedisStore()</div><div class="line">    &#125;));</div><div class="line">    app.use(flash());</div><div class="line">    app.use(app.router);</div><div class="line">    app.use(express.static(path.join(__dirname, <span class="string">'public'</span>)));</div><div class="line"> </div><div class="line">    <span class="keyword">if</span>(<span class="string">'test'</span> === app.get(<span class="string">'env'</span>))&#123;</div><div class="line">        app.set(<span class="string">'port'</span>,<span class="number">3001</span>);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="comment">// development only</span></div><div class="line">    <span class="keyword">if</span> (<span class="string">'development'</span> === app.get(<span class="string">'env'</span>)) &#123;</div><div class="line">      app.use(express.errorHandler());</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>Then from the route handler of the POST processing we have the following implementation.<br>This is basically where we set the status of the processing.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">app.post(<span class="string">'/sessions'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</div><div class="line">    <span class="keyword">if</span>((<span class="string">'admin'</span> === req.body.user) &amp;&amp; <span class="string">'12345'</span>===req.body.password)&#123;</div><div class="line">        req.session.currentUser = req.body.user;</div><div class="line">        req.flash(<span class="string">'info'</span>,<span class="string">"You are logged in as "</span>+req.session.currentUser);</div><div class="line">        res.redirect(<span class="string">'/login'</span>);</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    req.flash(<span class="string">'error'</span>,<span class="string">"Those credentials were incorrect. Try Again"</span>);</div><div class="line">    res.redirect(<span class="string">'/login'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>And finally we can use the status information that will have been attached to the res.locals from the jade template</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">if (typeof(flash) !=='undefined')</div><div class="line">    each flashType in flashTypes</div><div class="line">        if flash[flashType]</div><div class="line">            p.flash(class=flashType) #&#123;flash[flashType]&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;I’m currently following the Pluralsight training &lt;a href=&quot;http://www.pluralsight.com/training/Courses/TableOfContents/full-stack-nodejs&quot; 
+    
+    </summary>
+    
+    
+      <category term="JavaScript" scheme="http://alexandreroba.com/tags/JavaScript/"/>
+    
+      <category term="NodeJs" scheme="http://alexandreroba.com/tags/NodeJs/"/>
+    
+      <category term="ExpressJs" scheme="http://alexandreroba.com/tags/ExpressJs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>The yield keyword demystified</title>
+    <link href="http://alexandreroba.com/2014/01/The-yield-keyword-demistified/"/>
+    <id>http://alexandreroba.com/2014/01/The-yield-keyword-demistified/</id>
+    <published>2014-01-11T20:20:25.000Z</published>
+    <updated>2017-01-25T10:37:01.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>I had recently a discussion with a younger developper in C# that was asking question about the usage of the yield keyword.<br>He was saying he never used and though it was useless. He then confessed me it didn’t really understood wath the keyword was exactly about.<br>I tryed to explain him what it does and this the material I would have used it if I had it at that time.<br>I will try with this post to explain what “yield” is all about with simple but concrete examples.</p>
+<h2 id="First-thing-first-Where-can-we-use-it"><a href="#First-thing-first-Where-can-we-use-it" class="headerlink" title="First thing first. Where can we use it?"></a>First thing first. Where can we use it?</h2><p>It should be used in a function that returns an instance that implement IEnumerable or and IEnumerable&lt;&gt; interfaces.<br>The function must return explicitely one onf those interfaces like the two following functions:</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> IEnumerable <span class="title">GetIntegers1</span>(<span class="params"></span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">yield</span> <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">yield</span> <span class="keyword">return</span> <span class="number">2</span>;</div><div class="line">    <span class="keyword">yield</span> <span class="keyword">return</span> <span class="number">3</span>;</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">public</span> IEnumerable&lt;<span class="keyword">int</span>&gt; <span class="title">GetIntegers2</span>(<span class="params"></span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">yield</span> <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">yield</span> <span class="keyword">return</span> <span class="number">2</span>;</div><div class="line">    <span class="keyword">yield</span> <span class="keyword">return</span> <span class="number">3</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>By returning the IEnumerable interfaces those functions become iteratable and can now be used directly from the foreach loop like:</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">foreach</span> (<span class="function"><span class="keyword">var</span> i <span class="keyword">in</span> <span class="title">GetIntegers1</span>(<span class="params"></span>))</span></div><div class="line">&#123;</div><div class="line">    Console.WriteLine(i.ToString());</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="keyword">foreach</span> (<span class="function"><span class="keyword">int</span> i <span class="keyword">in</span> <span class="title">GetIntegers2</span>(<span class="params"></span>))</span></div><div class="line">&#123;</div><div class="line">    Console.WriteLine(i.ToString());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Ok-but-why-using-it"><a href="#Ok-but-why-using-it" class="headerlink" title="Ok but why using it?"></a>Ok but why using it?</h2><p>What is the difference between those two functions and this one?</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> IEnumerable <span class="title">GetIntegers1</span>(<span class="params"></span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> List&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>It might not be obvious at first sight as the result is identical but the execution flow is different.<br>Basically if you debug the program execution you will see the following for the returned list</p>
+<ol>
+<li>Enter the foreach loop</li>
+<li>Call the GetIntegers ONCE</li>
+<li>Write the first number</li>
+<li>Write the second number</li>
+<li>Write the third line</li>
+</ol>
+<p>And you will see the following when using the yield return</p>
+<ol>
+<li>Enter the foreach loop</li>
+<li>Call the GetIntegers but leave at the first return</li>
+<li>Write the first number</li>
+<li>Call the GetIntegers but start at the second return and leave just after</li>
+<li>Write the second number</li>
+<li>Call the GetIntegers but start at the third return and leave just after</li>
+<li>Write the third line</li>
+</ol>
+<p>That is all. It simply changes the execution flow and allow you to handle each element of the list one by one before the next element is called.</p>
+<h2 id="Fantastic-but-is-this-magic"><a href="#Fantastic-but-is-this-magic" class="headerlink" title="Fantastic! but is this magic?"></a>Fantastic! but is this magic?</h2><p>No it is not. You could have achieve the same result by having implemented yourself the iterator pattern using the interface IEnumerable and IEnumerator and building a dedicated class to handle this like the following code (for simplicity I will only implement IEnumerable but IEnumerable&lt;&gt; could have been implemented as well):</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">public class IterableList : IEnumerable, IEnumerator</div><div class="line">&#123;</div><div class="line">    public List numbers;</div><div class="line">    public int index;</div><div class="line"> </div><div class="line">    public IterableList()</div><div class="line">    &#123;</div><div class="line">        numbers = new List();</div><div class="line">        int index = 0;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    public IterableList(IEnumerable inputlist): this()</div><div class="line">    &#123;</div><div class="line">        foreach (var i in inputlist)</div><div class="line">        numbers.Add(i);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    public IEnumerator GetEnumerator()</div><div class="line">    &#123;</div><div class="line">        return this;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    public bool MoveNext()</div><div class="line">    &#123;</div><div class="line">        index++;</div><div class="line">        if (index &gt; numbers.Count)</div><div class="line">            return false;</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    public void Reset()</div><div class="line">    &#123;</div><div class="line">        index = 0;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    public object Current</div><div class="line">    &#123;</div><div class="line">        get</div><div class="line">        &#123;</div><div class="line">            if (index == 0)</div><div class="line">                return 0;</div><div class="line">            return numbers[index - 1];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>And then define a function:</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> IterableList <span class="title">GetIntegers3</span>(<span class="params"></span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> IterableList(<span class="keyword">new</span> List&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Both of the code generated by the compiler will look very similar.<br>This can be confirmed by looking at the IL code generated by both of our implementation.<br>We can see that when using yield an extra class is generated for us that implements IEnumerable and IEnumerator (and their generic version).</p>
+<p><img src="/images/The-yield-keyword-demystified/20140111-capture01.png" alt="IL Code for yield"></p>
+<p>The Iterable class we have written will look mostly the same (But for the generic versions that we have not implemented)</p>
+<p><img src="/images/The-yield-keyword-demystified/20140111-capture02.png" alt="IL Code for generic"></p>
+<h2 id="To-summarize"><a href="#To-summarize" class="headerlink" title="To summarize!"></a>To summarize!</h2><p>Basically using the yield will allow us to have the control over the way the items in our IEnumerable result items and their processing happens. And no magic behind.<br>It is simply an helper that will generate the code for you.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;I had recently a discussion with a younger developper in C# that was asking question about the usage of the yield keyword.&lt;br&gt;He was sayi
+    
+    </summary>
+    
+    
+      <category term=".NET" scheme="http://alexandreroba.com/tags/NET/"/>
+    
+      <category term="C#" scheme="http://alexandreroba.com/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>GAC Deployment versus BIN Deployment and security patches</title>
+    <link href="http://alexandreroba.com/2012/10/GAC-deployment-versus-bin-deployment-and-security-patches/"/>
+    <id>http://alexandreroba.com/2012/10/GAC-deployment-versus-bin-deployment-and-security-patches/</id>
+    <published>2012-10-12T19:20:25.000Z</published>
+    <updated>2017-01-25T10:37:01.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>In one of my assignment I had to investigate different ways to publish utility libraries to different projects and development team. The first idea that came to my mind was to build a Nuget package and to configure an internal Nuget Feed where I could publish my package. This sound like a good idea and I was going to close the analysis phase and settle down for the implementation when someone came to me and asked a question about how I was going to manage the Security patch deployment. Let me clarify what is a security patch.</p>
+<p>A Security patch is a patch that needs to be deploy to production no matter of the risk for the production application to gets into trouble. It is a patch that does not contain any API or interface change but contains only internal corrections. Those patch are not deployed in the scope of a particular application but are deployed on any machine a specific component is used. In my situation, as I’m only delivering Libraries, I need to be able to tell to the ops team “Please deploy this on all machine the library is in use”. And this is my major problem. I don’t know. My library get used through Nuget and only the client applications know the package they are using. I also cannot guarantee that a fix on one package with the publication of a new Nuget package version will be picked up right away by the client application development team and included in their next deployment.</p>
+<p>What option do I have here? Nuget package do not cover this scenario by design. My first reaction was to challenge the requirement? What kind of library might require a security patch? Not so many. You know what they say: “Show me a dragon and then I will show you excalibur”. This did not convince. I had to find a specific way to deploy those security sensible libraries.</p>
+<p>This when I started investigating GAC deployment. How do I achieve GAC deployment? Well I build my library and I make it available through an MSI. This MSI will register that library in the GAC. The MSI being deploy on machine as a unit of deployment, it can be tracked and inventoried by the OPS team. I can find the list of machine where I will have to deploy my security patch.</p>
+<p>The GAC deployment provides me with the possibility to deploy a new version version of a library on a machine and make sure any client application using the old version of the component will pick up the new version right away. I tested this and this is how I achieved this:</p>
+<p>I wrote two libraries with the following code:</p>
+<h2 id="Version-1-0-0-0"><a href="#Version-1-0-0-0" class="headerlink" title="Version 1.0.0.0"></a>Version 1.0.0.0</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">using</span> System.IO;</div><div class="line"> </div><div class="line"><span class="keyword">namespace</span> <span class="title">CommonLibrary</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Library</span></div><div class="line">    &#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Function</span>(<span class="params"></span>)</span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">var</span> file = <span class="keyword">new</span> StreamWriter(<span class="string">"D:\\VersionLog.txt"</span>,<span class="literal">true</span>);</div><div class="line">            file.WriteLine(<span class="string">"This is version 1.0.0.0 of the library's function"</span>);</div><div class="line">            file.Close();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Version-2-0-0-0"><a href="#Version-2-0-0-0" class="headerlink" title="Version 2.0.0.0"></a>Version 2.0.0.0</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">using</span> System.IO;</div><div class="line"> </div><div class="line"><span class="keyword">namespace</span> <span class="title">CommonLibrary</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Library</span></div><div class="line">    &#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Function</span>(<span class="params"></span>)</span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">var</span> file = <span class="keyword">new</span> StreamWriter(<span class="string">"D:\\VersionLog.txt"</span>,<span class="literal">true</span>);</div><div class="line">            file.WriteLine(<span class="string">"This is version 2.0.0.0 of the library's function"</span>);</div><div class="line">            file.Close();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Both of them where compiled and strongly signed with the same key.</p>
+<p>I wrote a small client app that was using the library It looked like that:</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">ClientApplication</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">class</span> <span class="title">Program</span></div><div class="line">    &#123;</div><div class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="keyword">string</span>[] args</span>)</span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">var</span> lib = <span class="keyword">new</span> Library();</div><div class="line">            lib.Function();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>I built those components on .NET framework 4.5 meaning I’m using the GAC of the .NET framework 4.0.</p>
+<p>I deploy the version 1.0.0.0 to the GAC using the following .NET framework 4.0 gacutil command from a visual studio 2012 command dos prompt:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">gacutil /i CommonLibrary.dll</div></pre></td></tr></table></figure>
+<p>I could then use the following command to check the proper installation of my component in the GAC</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">gacutil /l CommonLibrary</div></pre></td></tr></table></figure>
+<p>And the result was:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Microsoft (R) .NET Global Assembly Cache Utility.  Version 4.0.30319.17929</div><div class="line">Copyright (c) Microsoft Corporation.  All rights reserved.</div><div class="line"> </div><div class="line">The Global Assembly Cache contains the following assemblies:</div><div class="line">  CommonLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b523b0464e4856a6, processorArchitecture=MSIL</div><div class="line"> </div><div class="line">Number of items = 1</div></pre></td></tr></table></figure>
+<p>Then I ran the client application application exe file and I could check in my output file the following line</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">This is version 1.0.0.0 of the library&apos;s function</div></pre></td></tr></table></figure>
+<p>Then I deployed the version 2.0.0.0 of the library using the same method as previously mentioned.<br>I then run the the following command to check the content of my GAC</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">D:\dev\GacVersionning\libraries\V2&gt;gacutil /l CommonLibrary</div><div class="line">Microsoft (R) .NET Global Assembly Cache Utility.  Version 4.0.30319.17929</div><div class="line">Copyright (c) Microsoft Corporation.  All rights reserved.</div><div class="line"> </div><div class="line">The Global Assembly Cache contains the following assemblies:</div><div class="line">  CommonLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b523b0464e4856a6, processorArchitecture=MSIL</div><div class="line">  CommonLibrary, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b523b0464e4856a6, processorArchitecture=MSIL</div><div class="line"> </div><div class="line">Number of items = 2</div></pre></td></tr></table></figure>
+<p>This clearly shown the multiple version of my deployed library.<br>After running the client application I could see my client application was still using the version 1.0.0.0.<br>In order for my client application to use the version 2.0.0.0 of the library I have to deploy a policy file.<br>A policy file is a config file (XML) that gets compiled into a dll in order to be deployed to the gac.<br>This will tell the GAC to redirect all calls for a given version to a another version.</p>
+<p>This is the content of my policy config file that I named RedirectPolicyFile.config.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">runtime</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">assemblyBinding</span> <span class="attr">xmlns</span>=<span class="string">"urn:schemas-microsoft-com:asm.v1"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">dependentAssembly</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">assemblyIdentity</span> <span class="attr">name</span>=<span class="string">"CommonLibrary"</span> <span class="attr">publicKeyToken</span>=<span class="string">"b523b0464e4856a6"</span> <span class="attr">culture</span>=<span class="string">"neutral"</span> /&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">bindingRedirect</span> <span class="attr">oldVersion</span>=<span class="string">"1.0.0.0"</span> <span class="attr">newVersion</span>=<span class="string">"2.0.0.0"</span>/&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">dependentAssembly</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">assemblyBinding</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">runtime</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>I compiled it using the following command</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">al /link:RedirectPolicyFile.config /out:policy.1.0.CommonLibrary.dll /keyf:StrongName.snk</div></pre></td></tr></table></figure>
+<p>Then i registered the policy “policy.1.0.CommonLibrary.dll” to the gac using the same command as usual</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">gacutil /i policy.1.0.CommonLibrary.dll</div></pre></td></tr></table></figure>
+<p>We can then run the client application and check the output file. It should contain the following line:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">This is version 2.0.0.0 of the library&apos;s function</div></pre></td></tr></table></figure>
+<p>You have been security patched.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;In one of my assignment I had to investigate different ways to publish utility libraries to different projects and development team. The 
+    
+    </summary>
+    
+    
+      <category term=".NET" scheme="http://alexandreroba.com/tags/NET/"/>
+    
+      <category term="COM" scheme="http://alexandreroba.com/tags/COM/"/>
+    
+      <category term="C#" scheme="http://alexandreroba.com/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Isolated calls of dynamically loaded assemblies</title>
+    <link href="http://alexandreroba.com/2012/08/Isolated-calls-of-dynamically-loaded-assemblies/"/>
+    <id>http://alexandreroba.com/2012/08/Isolated-calls-of-dynamically-loaded-assemblies/</id>
+    <published>2012-08-27T19:20:25.000Z</published>
+    <updated>2017-01-25T10:37:01.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Definition-of-the-issue"><a href="#Definition-of-the-issue" class="headerlink" title="Definition of the issue:"></a>Definition of the issue:</h2><p>In one of the project I’m currently working on, I need to be able to call a function from an assembly that will be provided at run time.<br>One of the major requirement I have is to have a clear isolation of the call with a minimum of configuration.<br>The second requirement is  to be able to provide a regular configuration file on my callee assembly in order for a lambda developer to implement a WCF call in that assembly using regular config files.<br>Meaning they should be able to write a simple .NET Assembly referencing other assembly and making use of a config file and all that should work.</p>
+<p>There is no particular performance requirement. It is left to the developper of the callee assembly to manage this issue. It will be up to him to dispatch and manage threads if needed.</p>
+<h2 id="My-first-solution"><a href="#My-first-solution" class="headerlink" title="My first solution:"></a>My first solution:</h2><p>The easiest solution I found was to create a new app domain. To load the callee assembly in that new domain and to execute the call there. This gave me the isolation level I was needing.</p>
+<p>My calling class looks like this</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Setting the new app domaine configuration</span></div><div class="line">AppDomainSetup appDomainSetup = <span class="keyword">new</span> AppDomainSetup();</div><div class="line">appDomainSetup.ConfigurationFile = <span class="string">"Custom.Config"</span>; <span class="comment">//The config file of my calle assembly</span></div><div class="line">appDomainSetup.ApplicationName = <span class="string">"ProxyName"</span>; <span class="comment">//Just to be cleaner</span></div><div class="line">appDomainSetup.ApplicationBase = <span class="string">@"D:\dev\Dummy\ConsoleApplication2\ProxyComponent\bin\Debug\"</span>; <span class="comment">//Where is my calee assembly</span></div><div class="line"><span class="comment">//Creating a new app domain</span></div><div class="line">AppDomain domain = AppDomain.CreateDomain(<span class="string">"IsolatedDomain"</span>, <span class="literal">null</span>, appDomainSetup);</div><div class="line"><span class="comment">//My parameters</span></div><div class="line"><span class="keyword">string</span> dllFilePath = <span class="string">@"D:\dev\Dummy\ConsoleApplication2\ProxyComponent\bin\Debug\ProxyComponent.dll"</span>;</div><div class="line"><span class="keyword">string</span> proxyFullName = <span class="string">"ProxyComponent.Proxy"</span>;</div><div class="line"><span class="comment">//Loading my assembly in my new app domaine</span></div><div class="line">IScheduler myProxy = (IScheduler)domain.CreateInstanceFromAndUnwrap(dllFilePath, proxyFullName);</div><div class="line"><span class="comment">//Executing my call on the new app domain</span></div><div class="line">Console.WriteLine(myProxy.GetSettingValue(<span class="string">"Key01"</span>));</div></pre></td></tr></table></figure>
+<p>My ProxyComponent.Proxy class looks like this</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">appsettings</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">add</span> <span class="attr">key</span>=<span class="string">"Key01"</span> <span class="attr">value</span>=<span class="string">"Value01"</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">appsettings</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>The only shared assembly bet ween the callee and the caller  is the assembly that contains the <strong>IScheduler interface</strong>.</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IScheduler</span></div><div class="line">&#123;</div><div class="line">	<span class="function"><span class="keyword">string</span> <span class="title">GetSettingValue</span>(<span class="params"><span class="keyword">string</span> key</span>)</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>This could have been avoided using DLR and Dynamic. I’ll try to work on this in a near future.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Definition-of-the-issue&quot;&gt;&lt;a href=&quot;#Definition-of-the-issue&quot; class=&quot;headerlink&quot; title=&quot;Definition of the issue:&quot;&gt;&lt;/a&gt;Definition of th
+    
+    </summary>
+    
+    
+      <category term=".NET" scheme="http://alexandreroba.com/tags/NET/"/>
+    
+      <category term="C#" scheme="http://alexandreroba.com/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Is there something wrong with Enum.ToString()?</title>
+    <link href="http://alexandreroba.com/2012/05/Is-there-something-wrong-with-enum-tostring/"/>
+    <id>http://alexandreroba.com/2012/05/Is-there-something-wrong-with-enum-tostring/</id>
+    <published>2012-05-24T19:20:25.000Z</published>
+    <updated>2017-01-25T10:37:01.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>This morning, while we where working on the creation of Key/Value pair table containing different kind of entities one of my senior team meber ran into an “Exotic” behavior.<br>The key of our table is a string build on the composition of the entity Id and the entity type. The entity type is simply an enum value converted to a string. </p>
+<p>This looked like this:</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">_ToString = <span class="keyword">string</span>.Format(<span class="string">"[&#123;0&#125;/&#123;1&#125;]"</span>, id, contactType.ToString());</div></pre></td></tr></table></figure>
+<p><strong>contactType</strong> is here the enum variable. Nothing really fancy or complicate untill we ran the performance monitor on it.</p>
+<p>We saw that this line, according to its simplicity was taken too much time to  process.</p>
+<p>We have to perform this operation for millions of records and every millisecond counts.</p>
+<p>At first sight I though it was the string.Format() that was taking all the processing and we tried a quick optimization.</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">_ToString = <span class="string">"["</span> +  id + <span class="string">"/"</span> + contactType.ToString() + <span class="string">"]"</span>;</div></pre></td></tr></table></figure>
+<p>Same result. I had to face it, the ToString() of the enum variable was taking most of the processing.</p>
+<p>The number of entries in enum being short, we tried the following code:</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">switch</span> (contactType)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">case</span> ContactTypeEnum.Undefined:</div><div class="line">        _ToString = <span class="string">"["</span> + id + <span class="string">"/Undefined]"</span>;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    <span class="keyword">case</span> ContactTypeEnum.Organisation:</div><div class="line">        _ToString = <span class="string">"["</span> + id + <span class="string">"/Organisation]"</span>;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    <span class="keyword">case</span> ContactTypeEnum.NaturalPerson:</div><div class="line">        _ToString = <span class="string">"["</span> + id + <span class="string">"/NaturalPerson]"</span>;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    <span class="keyword">case</span> ContactTypeEnum.OrganisationContact:</div><div class="line">        _ToString = <span class="string">"["</span> + id + <span class="string">"/OrganisationContact]"</span>;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    <span class="keyword">default</span>:</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> ArgumentOutOfRangeException(<span class="string">"contactType"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>The difference was impressive. This long piece of code is almost 8 time faster.</p>
+<p>The following image gives the performance numbers of each of the code block.</p>
+<p><img src="/images/Is-there-something-wrong-with-enum-tostring/20120524-capture01.gif" alt="Enum.ToString performance capture"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;This morning, while we where working on the creation of Key/Value pair table containing different kind of entities one of my senior team 
+    
+    </summary>
+    
+    
+      <category term=".NET" scheme="http://alexandreroba.com/tags/NET/"/>
+    
+      <category term="C#" scheme="http://alexandreroba.com/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Enterprise, System, Software, Application, Technical Architect, what is my role?</title>
+    <link href="http://alexandreroba.com/2012/05/Enterprise-system-software-application-technical-architect-what-is-my-role/"/>
+    <id>http://alexandreroba.com/2012/05/Enterprise-system-software-application-technical-architect-what-is-my-role/</id>
+    <published>2012-05-23T19:20:25.000Z</published>
+    <updated>2017-01-25T10:37:01.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Enterprise, System, Software, Application Architect, just pick one.</p>
+<p>I’ve been on assignment building a strong commercial relationship with my current customer for several years now.<br>Interesting projects, nice environment, smart and fun colleagues, everything is available for me to stay happy and work there ever after… but… Well, I am starting to have the need to meet new people and face new challenges.<br>Of course I do not want to jeopardize my relation with my current customer, but I need to evolve. I need to get out of my comfort zone and start something fresh.</p>
+<p>This is why I have decided to update my resume and to investigate different opportunities that could be available on the IT market.<br>First think first. What am I? What is my role? On my current assignment I ‘m called a “Technical Architect”. Yeah!!… but what does it means…<br>This title is not available anywhere else. I checked on IEEE, Wikipedia, googled about it… there is no Technical Architect Role definition or at least I could not find one…</p>
+<p>As a “Technical Architect” what are my duties:</p>
+<p>Team coordination: Coordinate is not really the term. Lead and coach seems more appropriate.<br>I guide the team on the activities we should conduct in order to deliver and act as scrum master.<br>I advice the project manager on what is achievable and what is not and if I feel a potential risk on the project.</p>
+<p>Functional analysis: I do not conduct the functional analysis but I review it. I did it on the past but in Belgium you need to speak both national language to work on this area and unfortunately, I don’t.<br>I Review the functional analysis for consistency and feasibility. I challenge the content as well. I will probably not let build a space ship to cross the street.</p>
+<p>Technical Design and Architecture: I have an analytical mind. I like to conceptualize and modelize stuff. I enjoy putting structure and explain difficult concept.<br>If I manage to make myself understood then I can say I really have understood what I was talking about. This is probably the activity I’m better at.</p>
+<p>Development:  I love to code and unfortunately this is something I do not do enough. I’m told to be not to bad  at that and In order to stay up to date I try to do my TDD Kata at least three or four times a week.<br>I have a <a href="https:www.pluralsight.com" target="_blank" rel="external">pluralsight</a> subscription and I complete at least one training every two week. This is a must have for any developer.<br>I try to stay sharp or Csharp to be precise and pluralsight is a good way for this..</p>
+<p>Coaching: This is also something I like to do. I like to share knowledge. On my current assignment I try to do this on a daily basis.<br>I launch topics I read about. I advice on training people should follow. I share my tips I tricks and I try to understand what the others are doing.<br>If I manage to bring the level of expertise of the team I’m working with to a higher level of expertise then this is already a success for the project.</p>
+<p>Day to day management and client facing: I’m also organizing the deliveries and the operational hand over. Coordinating the testing and the delivering is also part of my duties.</p>
+<p>I perform other activities but those are most probably the most frequent ones.</p>
+<p>Now let see what title I can find to match those duties. l find on Wikipedia the following definitions:</p>
+<p><strong>Enterprise architect:</strong> handles the interaction between the business and IT sides of an organization and is principally involved with determining the AS-IS and TO-BE states from a business and IT process perspective.</p>
+<p><strong>Solution Architect:</strong> The Solutions Architect is responsible for the development of the overall vision that underlies the projected solution and transforms that vision through execution into the solution. Solution Architects in large organizations often act as the bridge between Enterprise Architects and Application Architects.</p>
+<p><strong>Application Architect:</strong> An application architect works with a single software application. This may be a full- or a part-time role. The application architect is almost always an active software developer.</p>
+<p>The following tables indicates many of their differences</p>
+<table>
+<thead>
+<tr>
+<th>Architect Type</th>
+<th>Strategic Thinking</th>
+<th>System Interactions</th>
+<th>Communication</th>
+<th>Design</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Enterprise Architect</td>
+<td>Across Projects</td>
+<td>Highly Abstracted</td>
+<td>Across Organization</td>
+<td>Minimal, High Level</td>
+</tr>
+<tr>
+<td>Solution Architect</td>
+<td>Focused on solution</td>
+<td>Very Detailed</td>
+<td>Multiple Teams</td>
+<td>Detailed</td>
+</tr>
+<tr>
+<td>Application Architect</td>
+<td>Component re-use, maintainability</td>
+<td>Centered on single Application</td>
+<td>Single Project</td>
+<td>Very Detailed</td>
+</tr>
+</tbody>
+</table>
+<p>According to those definitions and tables, I must probably seat somewhere between the Solution architect and the application architect but closer to this last one.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Enterprise, System, Software, Application Architect, just pick one.&lt;/p&gt;
+&lt;p&gt;I’ve been on assignment building a strong commercial relations
+    
+    </summary>
+    
+    
+      <category term="General" scheme="http://alexandreroba.com/tags/General/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>When not asking the right question can lead to stupid answer</title>
+    <link href="http://alexandreroba.com/2012/03/When-not-asking-the-right-question-can-lead-to-stupid-answer/"/>
+    <id>http://alexandreroba.com/2012/03/When-not-asking-the-right-question-can-lead-to-stupid-answer/</id>
+    <published>2012-03-21T20:20:25.000Z</published>
+    <updated>2017-01-25T10:37:01.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>I’m currently working on a project where the long ago choice to use SOAP as standard for all our services is making people stop thinking. I’m convincing that reconsidering technical choice when a valid and valuable context arises is an attitude that should be natural for all architects. But in the reality, it is not… Or maybe they might not be architects.</p>
+<p>I’m the kind of guy who prefer understand the “why” instead of learning the “what to do”. I’m an architect and by definition I think ahead, and I design a minimum up front. If I found something illogical…Well I will challenge it.</p>
+<p>Let me be more explicit on this. I need to build some services for a mobile middle ware. Those services are DATA services. They only provide CRUD operation on some entities that will made available to a mobile client. This mobile middle ware supports 4 kind of communication technologies (SOAP,SAP RFC, REST, SQL). It supports them in the same extend. Meaning it will not be able to support the full extent of features (transaction, security, reliability…) that each of those technologies support. It supports the bare minimum.</p>
+<p>Because we want to be SOA……. (Yeah!!!!) We have to use SOAP…(Yeah… What a shortcut…). Fine we are building DATA Services, and we need to use the more complex protocol for our services… This is a non-sense. Those services are meant only for this middle ware. Their contracts are tailored for the middle ware. There is no possibility for them to be used by something else than the middle ware and we are choosing the most complex and universal protocol….</p>
+<p>Why not considering something simpler like REST and a simple and optimized XML message? “Because this is not a company standard!”… What can I reply to this? I believe that this choice can make sense (Yes I say can make sense J) when the services you are building is meant to be a companywide service and used by different platform. But then it needs to be advertised like this. This is not our case… We are mainly providing services that list all instances of some entities. Those services will return hundreds of thousands of records. Let’s reconsider that companywide standard for this case and use it properly. Let’s build something which our customer will take advantage of for once. Let’s be “Thinker” and not follower this time.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;I’m currently working on a project where the long ago choice to use SOAP as standard for all our services is making people stop thinking.
+    
+    </summary>
+    
+    
+      <category term="General" scheme="http://alexandreroba.com/tags/General/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Structural domain entities or context oriented domain entities?</title>
+    <link href="http://alexandreroba.com/2011/10/Structural-domain-entities-or-context-oriented-domain-entities/"/>
+    <id>http://alexandreroba.com/2011/10/Structural-domain-entities-or-context-oriented-domain-entities/</id>
+    <published>2011-10-26T19:20:25.000Z</published>
+    <updated>2017-01-25T10:37:01.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>I’m working on a project that has been going on for couple of years now. We manage to deliver a solid and nice application composed of several building blocks. Those blocks  go from front end web application to mobile disconnected application all serviced by Web services components.</p>
+<p>This web service components are build on top of a DDD Architecture. The challenges we are facing now is that our Domain entities were design based on a structural approach and our domain entities becomes quite complex. For example we have a project aggregate root made of work package entities and them self made of activity entities.</p>
+<p>At the begining of project we had only a limited kind of project and activity type. The scope of the solution is constantly increasing and we are now having far more type of project and activities. Those domain entities become bigger and we have a lot behaviour which are partially overlapping each other and it is hard now to change one type specific behaviour without impacting the other inherited.</p>
+<p>In my quest to make all those complex entities more manageable and less interdependent. I’m trying to restructure them in bounded context and to organize them in context oriented entities. Meaning I’m trying to build entities which are meant to support some dedicated context and processes. Instead of having a domain entity model that looks like my database model. Their are now behavioural oriented not structural oriented.</p>
+<p>By doing this I’m ending up with far more aggregate roots but which are simplier and more maintainable. The repository are also now more complex as well. Before we had almost a one to one relation between a domain entity and the database model. It is not the case any more. We may end up by reading five different table to build a simple domain entity. I can live with that after all this is what the repository is there for. Serialiaze and deserialiez my domain entities.</p>
+<p>The major issue i still have to face now is the resistance of the development team to work this way. They have the feeling that we will end up by duplicating a lot of business rules. I tried to show them and explain them that if a business rules needs to be duplicated they we might have to refactor the bounded context cause they might not be that bounded… But that did not do the trick :(</p>
+<p>Has anyone gone throug the same experience? I would appreciate any advice on this.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;I’m working on a project that has been going on for couple of years now. We manage to deliver a solid and nice application composed of se
+    
+    </summary>
+    
+    
+      <category term="Architecture" scheme="http://alexandreroba.com/tags/Architecture/"/>
+    
+      <category term="Application Design" scheme="http://alexandreroba.com/tags/Application-Design/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SOA Patterns Entity Linking</title>
+    <link href="http://alexandreroba.com/2011/08/SOA-Patterns-entity-linking/"/>
+    <id>http://alexandreroba.com/2011/08/SOA-Patterns-entity-linking/</id>
+    <published>2011-08-16T19:20:25.000Z</published>
+    <updated>2017-01-25T10:37:01.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Amongst the recently <a href="http://www.infoq.com/news/2011/08/soa-patterns-update" target="_blank" rel="external">5 new SOA patterns</a> that were promoted from the candidate list to the <a href="http://www.soapatterns.org/masterlist_a.php" target="_blank" rel="external">Master list</a> of  the Master SOA Design Pattern Catalog, there is one pattern that I found pretty interesting. It is the <a href="http://www.soapatterns.org/entity_linking.php" target="_blank" rel="external">Entity Linking</a>.</p>
+<p>The idea behind this pattern is that, if you have defined several entity services in your SOA landscape, you could provide with one of the entities the id of the references entities AND the links to get access to those referenced entities. To be more concrete you could have two services, the order entity services and the product entity service, and when requesting an order entity you will get with the order entity the links to all product entities which are referenced in the order.</p>
+<p>This sounds interesting but can it be implemented? Are there any person who have tried to implement this pattern? I’m curious about the technic they have used to manage their links. I will be investigating more on this and I will keep you informed on my findings.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Amongst the recently &lt;a href=&quot;http://www.infoq.com/news/2011/08/soa-patterns-update&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;5 new SOA patterns&lt;/a
+    
+    </summary>
+    
+    
+      <category term="SOA" scheme="http://alexandreroba.com/tags/SOA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Why an entity key should not be a technical id?</title>
+    <link href="http://alexandreroba.com/2011/07/Why-an-entity-key-should-not-be-a-technical-id/"/>
+    <id>http://alexandreroba.com/2011/07/Why-an-entity-key-should-not-be-a-technical-id/</id>
+    <published>2011-07-28T19:20:25.000Z</published>
+    <updated>2017-01-25T10:37:01.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Like most of application architect out there that I have meet, I used to add a primary key column to every table I added to the ER Model I was working on. It was like a reflex: I create a customer table then I add a column “Pkid” of type int. The values of that column will be given by the RDBMS.</p>
+<p>That column had no meaning but the one of giving me a unique value for the table record. That table record was then linked one to one to my business entity. It was fine by that time. But… Then came distributed and loosely coupled systems. The instance of that entity may not be created centrally anymore. It may be created on a disconnected device and referenced by another disconnected instance. This is becoming more difficult to handle.</p>
+<p>It is not impossible but more complex. The disconnected system will have to provide a temporary key and used it as the FK value by the referencing entity. Then after posting the entity to the entity owner systems, it will have to update those temporary key with the final values provided by this owner system…. Fine!!! It works… But… My central system may have been sized to support a well defined number of users and the processing of those entities creation request may be pooled… Meaning I do not get the finale Id right after the posting and I may get entities that were created on other disconnected systems. Those new ones may have used as Id the same value that I used… Oups… Trouble again…</p>
+<p>Well you may go further and find a good solution for it but at what cost… My advice is to not use a RDBMS primary column as your entity key. You could do it on the RDBMS but this key should not be used outside your RDBMS. You should have a candidate key for which every external system is capable of creating new and unique key. Ideally a real business key or if that is not possible, a Unique identifier like a Guid.</p>
+<p>This will save you a major headache when you will go from that centrally managed system to a distributed and lossely coupled system. Trust me.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Like most of application architect out there that I have meet, I used to add a primary key column to every table I added to the ER Model 
+    
+    </summary>
+    
+    
+      <category term="Application Design" scheme="http://alexandreroba.com/tags/Application-Design/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>We should prefix our interface with an I</title>
+    <link href="http://alexandreroba.com/2011/07/Prefixing-Interface-with-I/"/>
+    <id>http://alexandreroba.com/2011/07/Prefixing-Interface-with-I/</id>
+    <published>2011-07-27T19:20:25.000Z</published>
+    <updated>2017-01-25T10:37:01.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>I’m currently reading the book “Clean Code A Handbook of Agile Software Craftsmanship” From Robert C. Martin and I read something that I would like to comment. In the section “Avoid Encoding” he mention the prefixing with an “I” the interface that should be avoided. Instead we should use, if needed, a suffix “imp” for the implementation class.</p>
+<p>This is a convention which is quite used in the Java world. I’ve downloaded a couple of open source framework in Java just to read their code source and I’ve found that convention used on a lot of them and I do not like it much. I prefer to use the I on the interface. Why? Cause the only unique element in an interface and the class implementing it, is the interface. Imagine the example provided in the book.It gives ShopFactory for the interface and ShopFactoryImp for the implementation but what about another factory implementing the interface. a Mock for example. It will be called ShopFactoryMockImp? What if they implement multiple interface?… I don’t think so. We should call the interface IShopFactory and all the class implementing it may not have to reference the interface name in their names. This is cleaner and makes more sense.</p>
+<p>The real question is should we use any prefix on the interface? And again… I believe so. Why When I’m browsing the solution files I like to see in the names what are the interfaces and what are the classes. Same thing when looking at the code, I like to know what is the base class and what are the interfaces amongst the inherited base class if any and the implemented interfaces.</p>
+<p>I hope this comment will help you make your own opinion.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;I’m currently reading the book “Clean Code A Handbook of Agile Software Craftsmanship” From Robert C. Martin and I read something that I 
+    
+    </summary>
+    
+    
+      <category term=".NET" scheme="http://alexandreroba.com/tags/NET/"/>
+    
+      <category term="C#" scheme="http://alexandreroba.com/tags/C/"/>
+    
+  </entry>
+  
+</feed>

@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Alexandre Roba&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Alexandre Roba's Blog">
+<meta property="og:url" content="http://alexandreroba.com/page/2/index.html">
+<meta property="og:site_name" content="Alexandre Roba's Blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Alexandre Roba's Blog">
+<meta name="twitter:creator" content="@https://twitter.com/alexandreroba">
+  
+    <link rel="alternate" href="/atom.xml" title="Alexandre Roba&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-27255613-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner">
+    <img src="/css/images/banner.jpg" style="display:none;" alt="">
+  </div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Alexandre Roba&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">One day I was born and since, I improvise.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories/videos">Videos</a>
+        
+          <a class="main-nav-link" href="/about">About me</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <a id="nav-github-link" class="nav-icon" href="https://github.com/alexandreroba"></a>
+        <a id="nav-linkedin-link" class="nav-icon" href="https://be.linkedin.com/in/alexandreroba"></a>
+        <a id="nav-twitter-link" class="nav-icon" href="https://twitter.com/alexandreroba"></a>
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://alexandreroba.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-Isolated-calls-of-dynamically-loaded-assemblies" class="article article-type-post" itemscope
+         itemprop="blogPost">
+    <div class="article-meta">
+        <a href="/2012/08/Isolated-calls-of-dynamically-loaded-assemblies/" class="article-date">
+  <time datetime="2012-08-27T19:20:25.000Z" itemprop="datePublished">2012-08-27</time>
+</a>
+        
+    </div>
+    <div class="article-inner">
+        
+        
+        <header class="article-header">
+            
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2012/08/Isolated-calls-of-dynamically-loaded-assemblies/">Isolated calls of dynamically loaded assemblies</a>
+    </h1>
+  
+
+        </header>
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+            <h2 id="Definition-of-the-issue"><a href="#Definition-of-the-issue" class="headerlink" title="Definition of the issue:"></a>Definition of the issue:</h2><p>In one of the project I’m currently working on, I need to be able to call a function from an assembly that will be provided at run time.<br>One of the major requirement I have is to have a clear isolation of the call with a minimum of configuration.<br>The second requirement is  to be able to provide a regular configuration file on my callee assembly in order for a lambda developer to implement a WCF call in that assembly using regular config files.<br>Meaning they should be able to write a simple .NET Assembly referencing other assembly and making use of a config file and all that should work.</p>
+<p>There is no particular performance requirement. It is left to the developper of the callee assembly to manage this issue. It will be up to him to dispatch and manage threads if needed.</p>
+<h2 id="My-first-solution"><a href="#My-first-solution" class="headerlink" title="My first solution:"></a>My first solution:</h2><p>The easiest solution I found was to create a new app domain. To load the callee assembly in that new domain and to execute the call there. This gave me the isolation level I was needing.</p>
+<p>My calling class looks like this</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Setting the new app domaine configuration</span></div><div class="line">AppDomainSetup appDomainSetup = <span class="keyword">new</span> AppDomainSetup();</div><div class="line">appDomainSetup.ConfigurationFile = <span class="string">"Custom.Config"</span>; <span class="comment">//The config file of my calle assembly</span></div><div class="line">appDomainSetup.ApplicationName = <span class="string">"ProxyName"</span>; <span class="comment">//Just to be cleaner</span></div><div class="line">appDomainSetup.ApplicationBase = <span class="string">@"D:\dev\Dummy\ConsoleApplication2\ProxyComponent\bin\Debug\"</span>; <span class="comment">//Where is my calee assembly</span></div><div class="line"><span class="comment">//Creating a new app domain</span></div><div class="line">AppDomain domain = AppDomain.CreateDomain(<span class="string">"IsolatedDomain"</span>, <span class="literal">null</span>, appDomainSetup);</div><div class="line"><span class="comment">//My parameters</span></div><div class="line"><span class="keyword">string</span> dllFilePath = <span class="string">@"D:\dev\Dummy\ConsoleApplication2\ProxyComponent\bin\Debug\ProxyComponent.dll"</span>;</div><div class="line"><span class="keyword">string</span> proxyFullName = <span class="string">"ProxyComponent.Proxy"</span>;</div><div class="line"><span class="comment">//Loading my assembly in my new app domaine</span></div><div class="line">IScheduler myProxy = (IScheduler)domain.CreateInstanceFromAndUnwrap(dllFilePath, proxyFullName);</div><div class="line"><span class="comment">//Executing my call on the new app domain</span></div><div class="line">Console.WriteLine(myProxy.GetSettingValue(<span class="string">"Key01"</span>));</div></pre></td></tr></table></figure>
+<p>My ProxyComponent.Proxy class looks like this</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">appsettings</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">add</span> <span class="attr">key</span>=<span class="string">"Key01"</span> <span class="attr">value</span>=<span class="string">"Value01"</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">appsettings</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>The only shared assembly bet ween the callee and the caller  is the assembly that contains the <strong>IScheduler interface</strong>.</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IScheduler</span></div><div class="line">&#123;</div><div class="line">	<span class="function"><span class="keyword">string</span> <span class="title">GetSettingValue</span>(<span class="params"><span class="keyword">string</span> key</span>)</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>This could have been avoided using DLR and Dynamic. I’ll try to work on this in a near future.</p>
+
+            
+        </div>
+        <footer class="article-footer">
+            <a data-url="http://alexandreroba.com/2012/08/Isolated-calls-of-dynamically-loaded-assemblies/" data-id="ciyctm92f0005h5hcnwbdaqnq"
+               class="article-share-link">Share</a>
+            
+            <a href="http://alexandreroba.com/2012/08/Isolated-calls-of-dynamically-loaded-assemblies/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NET/">.NET</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C#</a></li></ul>
+
+        </footer>
+        
+    </div>
+    
+</article>
+
+  
+    <article id="post-Is-there-something-wrong-with-enum-tostring" class="article article-type-post" itemscope
+         itemprop="blogPost">
+    <div class="article-meta">
+        <a href="/2012/05/Is-there-something-wrong-with-enum-tostring/" class="article-date">
+  <time datetime="2012-05-24T19:20:25.000Z" itemprop="datePublished">2012-05-24</time>
+</a>
+        
+    </div>
+    <div class="article-inner">
+        
+        
+        <header class="article-header">
+            
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2012/05/Is-there-something-wrong-with-enum-tostring/">Is there something wrong with Enum.ToString()?</a>
+    </h1>
+  
+
+        </header>
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+            <p>This morning, while we where working on the creation of Key/Value pair table containing different kind of entities one of my senior team meber ran into an “Exotic” behavior.<br>The key of our table is a string build on the composition of the entity Id and the entity type. The entity type is simply an enum value converted to a string. </p>
+<p>This looked like this:</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">_ToString = <span class="keyword">string</span>.Format(<span class="string">"[&#123;0&#125;/&#123;1&#125;]"</span>, id, contactType.ToString());</div></pre></td></tr></table></figure>
+<p><strong>contactType</strong> is here the enum variable. Nothing really fancy or complicate untill we ran the performance monitor on it.</p>
+<p>We saw that this line, according to its simplicity was taken too much time to  process.</p>
+<p>We have to perform this operation for millions of records and every millisecond counts.</p>
+<p>At first sight I though it was the string.Format() that was taking all the processing and we tried a quick optimization.</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">_ToString = <span class="string">"["</span> +  id + <span class="string">"/"</span> + contactType.ToString() + <span class="string">"]"</span>;</div></pre></td></tr></table></figure>
+<p>Same result. I had to face it, the ToString() of the enum variable was taking most of the processing.</p>
+<p>The number of entries in enum being short, we tried the following code:</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">switch</span> (contactType)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">case</span> ContactTypeEnum.Undefined:</div><div class="line">        _ToString = <span class="string">"["</span> + id + <span class="string">"/Undefined]"</span>;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    <span class="keyword">case</span> ContactTypeEnum.Organisation:</div><div class="line">        _ToString = <span class="string">"["</span> + id + <span class="string">"/Organisation]"</span>;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    <span class="keyword">case</span> ContactTypeEnum.NaturalPerson:</div><div class="line">        _ToString = <span class="string">"["</span> + id + <span class="string">"/NaturalPerson]"</span>;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    <span class="keyword">case</span> ContactTypeEnum.OrganisationContact:</div><div class="line">        _ToString = <span class="string">"["</span> + id + <span class="string">"/OrganisationContact]"</span>;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    <span class="keyword">default</span>:</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> ArgumentOutOfRangeException(<span class="string">"contactType"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>The difference was impressive. This long piece of code is almost 8 time faster.</p>
+<p>The following image gives the performance numbers of each of the code block.</p>
+<p><img src="/images/Is-there-something-wrong-with-enum-tostring/20120524-capture01.gif" alt="Enum.ToString performance capture"></p>
+
+            
+        </div>
+        <footer class="article-footer">
+            <a data-url="http://alexandreroba.com/2012/05/Is-there-something-wrong-with-enum-tostring/" data-id="ciyctm92g0006h5hcotmrj0cn"
+               class="article-share-link">Share</a>
+            
+            <a href="http://alexandreroba.com/2012/05/Is-there-something-wrong-with-enum-tostring/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NET/">.NET</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C#</a></li></ul>
+
+        </footer>
+        
+    </div>
+    
+</article>
+
+  
+    <article id="post-Enterprise-system-software-application-technical-architect-what-is-my-role" class="article article-type-post" itemscope
+         itemprop="blogPost">
+    <div class="article-meta">
+        <a href="/2012/05/Enterprise-system-software-application-technical-architect-what-is-my-role/" class="article-date">
+  <time datetime="2012-05-23T19:20:25.000Z" itemprop="datePublished">2012-05-23</time>
+</a>
+        
+    </div>
+    <div class="article-inner">
+        
+        
+        <header class="article-header">
+            
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2012/05/Enterprise-system-software-application-technical-architect-what-is-my-role/">Enterprise, System, Software, Application, Technical Architect, what is my role?</a>
+    </h1>
+  
+
+        </header>
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+            <p>Enterprise, System, Software, Application Architect, just pick one.</p>
+<p>I’ve been on assignment building a strong commercial relationship with my current customer for several years now.<br>Interesting projects, nice environment, smart and fun colleagues, everything is available for me to stay happy and work there ever after… but… Well, I am starting to have the need to meet new people and face new challenges.<br>Of course I do not want to jeopardize my relation with my current customer, but I need to evolve. I need to get out of my comfort zone and start something fresh.</p>
+<p>This is why I have decided to update my resume and to investigate different opportunities that could be available on the IT market.<br>First think first. What am I? What is my role? On my current assignment I ‘m called a “Technical Architect”. Yeah!!… but what does it means…<br>This title is not available anywhere else. I checked on IEEE, Wikipedia, googled about it… there is no Technical Architect Role definition or at least I could not find one…</p>
+<p>As a “Technical Architect” what are my duties:</p>
+<p>Team coordination: Coordinate is not really the term. Lead and coach seems more appropriate.<br>I guide the team on the activities we should conduct in order to deliver and act as scrum master.<br>I advice the project manager on what is achievable and what is not and if I feel a potential risk on the project.</p>
+<p>Functional analysis: I do not conduct the functional analysis but I review it. I did it on the past but in Belgium you need to speak both national language to work on this area and unfortunately, I don’t.<br>I Review the functional analysis for consistency and feasibility. I challenge the content as well. I will probably not let build a space ship to cross the street.</p>
+<p>Technical Design and Architecture: I have an analytical mind. I like to conceptualize and modelize stuff. I enjoy putting structure and explain difficult concept.<br>If I manage to make myself understood then I can say I really have understood what I was talking about. This is probably the activity I’m better at.</p>
+<p>Development:  I love to code and unfortunately this is something I do not do enough. I’m told to be not to bad  at that and In order to stay up to date I try to do my TDD Kata at least three or four times a week.<br>I have a <a href="https:www.pluralsight.com" target="_blank" rel="external">pluralsight</a> subscription and I complete at least one training every two week. This is a must have for any developer.<br>I try to stay sharp or Csharp to be precise and pluralsight is a good way for this..</p>
+<p>Coaching: This is also something I like to do. I like to share knowledge. On my current assignment I try to do this on a daily basis.<br>I launch topics I read about. I advice on training people should follow. I share my tips I tricks and I try to understand what the others are doing.<br>If I manage to bring the level of expertise of the team I’m working with to a higher level of expertise then this is already a success for the project.</p>
+<p>Day to day management and client facing: I’m also organizing the deliveries and the operational hand over. Coordinating the testing and the delivering is also part of my duties.</p>
+<p>I perform other activities but those are most probably the most frequent ones.</p>
+<p>Now let see what title I can find to match those duties. l find on Wikipedia the following definitions:</p>
+<p><strong>Enterprise architect:</strong> handles the interaction between the business and IT sides of an organization and is principally involved with determining the AS-IS and TO-BE states from a business and IT process perspective.</p>
+<p><strong>Solution Architect:</strong> The Solutions Architect is responsible for the development of the overall vision that underlies the projected solution and transforms that vision through execution into the solution. Solution Architects in large organizations often act as the bridge between Enterprise Architects and Application Architects.</p>
+<p><strong>Application Architect:</strong> An application architect works with a single software application. This may be a full- or a part-time role. The application architect is almost always an active software developer.</p>
+<p>The following tables indicates many of their differences</p>
+<table>
+<thead>
+<tr>
+<th>Architect Type</th>
+<th>Strategic Thinking</th>
+<th>System Interactions</th>
+<th>Communication</th>
+<th>Design</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Enterprise Architect</td>
+<td>Across Projects</td>
+<td>Highly Abstracted</td>
+<td>Across Organization</td>
+<td>Minimal, High Level</td>
+</tr>
+<tr>
+<td>Solution Architect</td>
+<td>Focused on solution</td>
+<td>Very Detailed</td>
+<td>Multiple Teams</td>
+<td>Detailed</td>
+</tr>
+<tr>
+<td>Application Architect</td>
+<td>Component re-use, maintainability</td>
+<td>Centered on single Application</td>
+<td>Single Project</td>
+<td>Very Detailed</td>
+</tr>
+</tbody>
+</table>
+<p>According to those definitions and tables, I must probably seat somewhere between the Solution architect and the application architect but closer to this last one.</p>
+
+            
+        </div>
+        <footer class="article-footer">
+            <a data-url="http://alexandreroba.com/2012/05/Enterprise-system-software-application-technical-architect-what-is-my-role/" data-id="ciyctm9260001h5hc5z1s2r0v"
+               class="article-share-link">Share</a>
+            
+            <a href="http://alexandreroba.com/2012/05/Enterprise-system-software-application-technical-architect-what-is-my-role/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/General/">General</a></li></ul>
+
+        </footer>
+        
+    </div>
+    
+</article>
+
+  
+    <article id="post-When-not-asking-the-right-question-can-lead-to-stupid-answer" class="article article-type-post" itemscope
+         itemprop="blogPost">
+    <div class="article-meta">
+        <a href="/2012/03/When-not-asking-the-right-question-can-lead-to-stupid-answer/" class="article-date">
+  <time datetime="2012-03-21T20:20:25.000Z" itemprop="datePublished">2012-03-21</time>
+</a>
+        
+    </div>
+    <div class="article-inner">
+        
+        
+        <header class="article-header">
+            
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2012/03/When-not-asking-the-right-question-can-lead-to-stupid-answer/">When not asking the right question can lead to stupid answer</a>
+    </h1>
+  
+
+        </header>
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+            <p>I’m currently working on a project where the long ago choice to use SOAP as standard for all our services is making people stop thinking. I’m convincing that reconsidering technical choice when a valid and valuable context arises is an attitude that should be natural for all architects. But in the reality, it is not… Or maybe they might not be architects.</p>
+<p>I’m the kind of guy who prefer understand the “why” instead of learning the “what to do”. I’m an architect and by definition I think ahead, and I design a minimum up front. If I found something illogical…Well I will challenge it.</p>
+<p>Let me be more explicit on this. I need to build some services for a mobile middle ware. Those services are DATA services. They only provide CRUD operation on some entities that will made available to a mobile client. This mobile middle ware supports 4 kind of communication technologies (SOAP,SAP RFC, REST, SQL). It supports them in the same extend. Meaning it will not be able to support the full extent of features (transaction, security, reliability…) that each of those technologies support. It supports the bare minimum.</p>
+<p>Because we want to be SOA……. (Yeah!!!!) We have to use SOAP…(Yeah… What a shortcut…). Fine we are building DATA Services, and we need to use the more complex protocol for our services… This is a non-sense. Those services are meant only for this middle ware. Their contracts are tailored for the middle ware. There is no possibility for them to be used by something else than the middle ware and we are choosing the most complex and universal protocol….</p>
+<p>Why not considering something simpler like REST and a simple and optimized XML message? “Because this is not a company standard!”… What can I reply to this? I believe that this choice can make sense (Yes I say can make sense J) when the services you are building is meant to be a companywide service and used by different platform. But then it needs to be advertised like this. This is not our case… We are mainly providing services that list all instances of some entities. Those services will return hundreds of thousands of records. Let’s reconsider that companywide standard for this case and use it properly. Let’s build something which our customer will take advantage of for once. Let’s be “Thinker” and not follower this time.</p>
+
+            
+        </div>
+        <footer class="article-footer">
+            <a data-url="http://alexandreroba.com/2012/03/When-not-asking-the-right-question-can-lead-to-stupid-answer/" data-id="ciyctm92q000hh5hcxhh51eov"
+               class="article-share-link">Share</a>
+            
+            <a href="http://alexandreroba.com/2012/03/When-not-asking-the-right-question-can-lead-to-stupid-answer/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/General/">General</a></li></ul>
+
+        </footer>
+        
+    </div>
+    
+</article>
+
+  
+    <article id="post-Structural-domain-entities-or-context-oriented-domain-entities" class="article article-type-post" itemscope
+         itemprop="blogPost">
+    <div class="article-meta">
+        <a href="/2011/10/Structural-domain-entities-or-context-oriented-domain-entities/" class="article-date">
+  <time datetime="2011-10-26T19:20:25.000Z" itemprop="datePublished">2011-10-26</time>
+</a>
+        
+    </div>
+    <div class="article-inner">
+        
+        
+        <header class="article-header">
+            
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2011/10/Structural-domain-entities-or-context-oriented-domain-entities/">Structural domain entities or context oriented domain entities?</a>
+    </h1>
+  
+
+        </header>
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+            <p>I’m working on a project that has been going on for couple of years now. We manage to deliver a solid and nice application composed of several building blocks. Those blocks  go from front end web application to mobile disconnected application all serviced by Web services components.</p>
+<p>This web service components are build on top of a DDD Architecture. The challenges we are facing now is that our Domain entities were design based on a structural approach and our domain entities becomes quite complex. For example we have a project aggregate root made of work package entities and them self made of activity entities.</p>
+<p>At the begining of project we had only a limited kind of project and activity type. The scope of the solution is constantly increasing and we are now having far more type of project and activities. Those domain entities become bigger and we have a lot behaviour which are partially overlapping each other and it is hard now to change one type specific behaviour without impacting the other inherited.</p>
+<p>In my quest to make all those complex entities more manageable and less interdependent. I’m trying to restructure them in bounded context and to organize them in context oriented entities. Meaning I’m trying to build entities which are meant to support some dedicated context and processes. Instead of having a domain entity model that looks like my database model. Their are now behavioural oriented not structural oriented.</p>
+<p>By doing this I’m ending up with far more aggregate roots but which are simplier and more maintainable. The repository are also now more complex as well. Before we had almost a one to one relation between a domain entity and the database model. It is not the case any more. We may end up by reading five different table to build a simple domain entity. I can live with that after all this is what the repository is there for. Serialiaze and deserialiez my domain entities.</p>
+<p>The major issue i still have to face now is the resistance of the development team to work this way. They have the feeling that we will end up by duplicating a lot of business rules. I tried to show them and explain them that if a business rules needs to be duplicated they we might have to refactor the bounded context cause they might not be that bounded… But that did not do the trick :(</p>
+<p>Has anyone gone throug the same experience? I would appreciate any advice on this.</p>
+
+            
+        </div>
+        <footer class="article-footer">
+            <a data-url="http://alexandreroba.com/2011/10/Structural-domain-entities-or-context-oriented-domain-entities/" data-id="ciyctm92n000eh5hc0hfm5m6r"
+               class="article-share-link">Share</a>
+            
+            <a href="http://alexandreroba.com/2011/10/Structural-domain-entities-or-context-oriented-domain-entities/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Application-Design/">Application Design</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Architecture/">Architecture</a></li></ul>
+
+        </footer>
+        
+    </div>
+    
+</article>
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">__('next') &raquo;</a>
+  </nav>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/videos/">videos</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/NET/">.NET</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Application-Design/">Application Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/COM/">COM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ExpressJs/">ExpressJs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/General/">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NodeJs/">NodeJs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Powershell/">Powershell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SOA/">SOA</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/NET/" style="font-size: 20px;">.NET</a> <a href="/tags/Application-Design/" style="font-size: 12.5px;">Application Design</a> <a href="/tags/Architecture/" style="font-size: 10px;">Architecture</a> <a href="/tags/C/" style="font-size: 17.5px;">C#</a> <a href="/tags/COM/" style="font-size: 10px;">COM</a> <a href="/tags/ExpressJs/" style="font-size: 10px;">ExpressJs</a> <a href="/tags/General/" style="font-size: 15px;">General</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/NodeJs/" style="font-size: 10px;">NodeJs</a> <a href="/tags/Powershell/" style="font-size: 10px;">Powershell</a> <a href="/tags/SOA/" style="font-size: 10px;">SOA</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/05/">May 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/03/">March 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/10/The-Ultimate-list-of-developer-Podcasts-from-SimpleProgrammer/">The Ultimate list of developer Podcasts from SimpleProgrammer</a>
+          </li>
+        
+          <li>
+            <a href="/2014/09/Powershell-for-developers-French/">Powershell for developers [French]</a>
+          </li>
+        
+          <li>
+            <a href="/2014/01/Implementing-a-flash-middleware-on-expressjs-3x/">Implementing a flash middleware on express.js 3.x</a>
+          </li>
+        
+          <li>
+            <a href="/2014/01/The-yield-keyword-demistified/">The yield keyword demystified</a>
+          </li>
+        
+          <li>
+            <a href="/2012/10/GAC-deployment-versus-bin-deployment-and-security-patches/">GAC Deployment versus BIN Deployment and security patches</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Alexandre Roba<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories/videos" class="mobile-nav-link">Videos</a>
+  
+    <a href="/about" class="mobile-nav-link">About me</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'alexandreroba';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
