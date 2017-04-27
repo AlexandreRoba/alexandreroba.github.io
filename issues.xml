@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<issues>
+    <issue>
+        <field name="Type">
+            <value>Story</value>
+        </field>
+        <field name="Priority">
+            <value>2 - Should Have</value>
+        </field>
+        <field name="State">
+            <value>Tested</value>
+        </field>
+        <field name="Story points"/>
+        <field name="Assignee"/>
+        <field name="Sprints">
+            <value>R11-Various</value>
+        </field>
+        <field name="Ideal days"/>
+        <field name="numberInProject">
+            <value>1</value>
+        </field>
+        <field name="summary">
+            <value>See all projects button</value>
+        </field>
+        <field name="description">
+            <value>Based on the clicktale report the 'See all' project button on the homepage is not found by users. Please place a clear button under the 4 projects on the homepage. Same as for articles at the moment.</value>
+        </field>
+        <field name="created">
+            <value>1493208024986</value>
+        </field>
+        <field name="updated">
+            <value>1493213855835</value>
+        </field>
+        <field name="reporterName">
+            <value>aroba</value>
+        </field>
+        <field name="updaterName">
+            <value>aroba</value>
+        </field>
+        <field name="permittedGroup">
+            <value>All Users</value>
+        </field>
+    </issue>
+    <issue>
+        <field name="Type">
+            <value>Story</value>
+        </field>
+        <field name="Priority">
+            <value>2 - Should Have</value>
+        </field>
+        <field name="State">
+            <value>Tested</value>
+        </field>
+        <field name="Story points"/>
+        <field name="Assignee">
+            <value>jsoquay</value>
+        </field>
+        <field name="Sprints">
+            <value>R11-Various</value>
+        </field>
+        <field name="Ideal days"/>
+        <field name="numberInProject">
+            <value>2</value>
+        </field>
+        <field name="summary">
+            <value>Embed codes social media</value>
+        </field>
+        <field name="description">
+            <value>UPDATE : Vine &amp; Linkedin is out of scope
+
+User story
+
+As a publisher I want to embed certain posts from our social media channels so that we can create better articles and drive traffic towards the channels
+Scenario
+
+We have made a test: https://crowd.qahellobank.be/newsdetails/test-embed-code
+Twitter, instagram and embedly are not working properly
+Embed code to test : 
+
+Twitter
+Facebook
+Instagram
+Spotify
+Soundcloud
+Google+
+Pinterest pins &amp; boards
+SlideShare
+Tumblr
+Giphy
+Youtube
+Vimeo (and other video channels)
+Embedly</value>
+        </field>
+        <field name="created">
+            <value>1493208188958</value>
+        </field>
+        <field name="updated">
+            <value>1493213958384</value>
+        </field>
+        <field name="reporterName">
+            <value>aroba</value>
+        </field>
+        <field name="updaterName">
+            <value>aroba</value>
+        </field>
+        <field name="permittedGroup">
+            <value>All Users</value>
+        </field>
+    </issue>
+    <issue>
+        <field name="Type">
+            <value>Story</value>
+        </field>
+        <field name="Priority">
+            <value>2 - Should Have</value>
+        </field>
+        <field name="State">
+            <value>In Test</value>
+        </field>
+        <field name="Story points"/>
+        <field name="Assignee"/>
+        <field name="Sprints">
+            <value>R11-Various</value>
+        </field>
+        <field name="Ideal days"/>
+        <field name="numberInProject">
+            <value>3</value>
+        </field>
+        <field name="summary">
+            <value>Publication date articles</value>
+        </field>
+        <field name="description">
+            <value>Add the publication date inside the article template
+
+
+
+Publication date (not creation date) 
+
+For all content types
+For events we keep the event start date, to avoid confusion.
+
+Structure : Par &lt;auteur&gt;, le &lt;date&gt;</value>
+        </field>
+        <field name="created">
+            <value>1493208695797</value>
+        </field>
+        <field name="updated">
+            <value>1493213974088</value>
+        </field>
+        <field name="reporterName">
+            <value>aroba</value>
+        </field>
+        <field name="updaterName">
+            <value>aroba</value>
+        </field>
+        <field name="permittedGroup">
+            <value>All Users</value>
+        </field>
+    </issue>
+    <issue>
+        <field name="Type">
+            <value>Story</value>
+        </field>
+        <field name="Priority">
+            <value>2 - Should Have</value>
+        </field>
+        <field name="State">
+            <value>Tested</value>
+        </field>
+        <field name="Story points"/>
+        <field name="Assignee">
+            <value>jsoquay</value>
+        </field>
+        <field name="Sprints">
+            <value>R11-Various</value>
+        </field>
+        <field name="Ideal days"/>
+        <field name="numberInProject">
+            <value>4</value>
+        </field>
+        <field name="summary">
+            <value>Schedule article publishing</value>
+        </field>
+        <field name="description">
+            <value>UPDATE : Also for events &amp; contest
+
+User story
+
+As a content manager I want to schedule articles' publishing so that I can efficiently publish content at any time.
+Criteria
+N/A
+
+Scenarios
+N/A</value>
+        </field>
+        <field name="created">
+            <value>1493213378075</value>
+        </field>
+        <field name="updated">
+            <value>1493292519788</value>
+        </field>
+        <field name="reporterName">
+            <value>aroba</value>
+        </field>
+        <field name="updaterName">
+            <value>jsoquay</value>
+        </field>
+        <field name="permittedGroup">
+            <value>All Users</value>
+        </field>
+    </issue>
+    <issue>
+        <field name="Type">
+            <value>Story</value>
+        </field>
+        <field name="Priority">
+            <value>2 - Should Have</value>
+        </field>
+        <field name="State">
+            <value>Ready For Test</value>
+        </field>
+        <field name="Story points"/>
+        <field name="Assignee">
+            <value>efauviaux</value>
+        </field>
+        <field name="Sprints">
+            <value>R11-Various</value>
+        </field>
+        <field name="Ideal days"/>
+        <field name="numberInProject">
+            <value>5</value>
+        </field>
+        <field name="summary">
+            <value>Sourcetag inside submit email</value>
+        </field>
+        <field name="description">
+            <value>Today we send an email to our general inbox when a project is submitted (see under). Can we also add the sourcetag parameter inside that email?
+
+Like that we can easily see if a project came via Google, Facebook or other paid advertising campaign.
+
+Discussed with Xavier, the solution is to:
+
+- add a hidden field to the form and fill it with the sourcetag parameter we can pick out of the cookie</value>
+        </field>
+        <field name="created">
+            <value>1493213484999</value>
+        </field>
+        <field name="updated">
+            <value>1493214001026</value>
+        </field>
+        <field name="reporterName">
+            <value>aroba</value>
+        </field>
+        <field name="updaterName">
+            <value>aroba</value>
+        </field>
+        <field name="permittedGroup">
+            <value>All Users</value>
+        </field>
+    </issue>
+    <issue>
+        <field name="Type">
+            <value>Bug</value>
+        </field>
+        <field name="Priority">
+            <value>2 - Should Have</value>
+        </field>
+        <field name="State">
+            <value>In Progress</value>
+        </field>
+        <field name="Story points"/>
+        <field name="Assignee"/>
+        <field name="Sprints">
+            <value>R11-Various</value>
+        </field>
+        <field name="Ideal days"/>
+        <field name="numberInProject">
+            <value>6</value>
+        </field>
+        <field name="summary">
+            <value>Contributors list &amp; total amount is not updated (analysis only)</value>
+        </field>
+        <field name="description">
+            <value>The task to recover the contributors to add in the contributors list seems not working on production since few days (I think that it's since 2 days)
+
+- On the project "heaven-fotoboek", the last contributiors (Joeri and me, yesterday) are not displayed in the contributor list
+- The project "from-belgium" counts 12 contributors but nothing is displayed (see screenshot)
+
+- My contribution of the day on the project "showvelo-2017" is not displayed on production</value>
+        </field>
+        <field name="created">
+            <value>1493213633409</value>
+        </field>
+        <field name="updated">
+            <value>1493214087559</value>
+        </field>
+        <field name="reporterName">
+            <value>aroba</value>
+        </field>
+        <field name="updaterName">
+            <value>aroba</value>
+        </field>
+        <field name="permittedGroup">
+            <value>All Users</value>
+        </field>
+    </issue>
+    <issue>
+        <field name="Type">
+            <value>Story</value>
+        </field>
+        <field name="Priority">
+            <value>2 - Should Have</value>
+        </field>
+        <field name="State">
+            <value>In Progress</value>
+        </field>
+        <field name="Story points"/>
+        <field name="Assignee">
+            <value>gsomers</value>
+        </field>
+        <field name="Sprints">
+            <value>R11-Various</value>
+        </field>
+        <field name="Ideal days"/>
+        <field name="numberInProject">
+            <value>7</value>
+        </field>
+        <field name="summary">
+            <value>Make Tags clickable</value>
+        </field>
+        <field name="description">
+            <value>Description
+
+As a visitor I want to click on tags so that I see related articles based on the same tag. 
+User story
+
+As a visitor I want to click on tags so that I see related articles based on the same tag
+Criteria
+
+The articles shown should be related to the same tag</value>
+        </field>
+        <field name="created">
+            <value>1493213674722</value>
+        </field>
+        <field name="updated">
+            <value>1493214022339</value>
+        </field>
+        <field name="reporterName">
+            <value>aroba</value>
+        </field>
+        <field name="updaterName">
+            <value>aroba</value>
+        </field>
+        <field name="permittedGroup">
+            <value>All Users</value>
+        </field>
+    </issue>
+    <issue>
+        <field name="Type">
+            <value>Story</value>
+        </field>
+        <field name="Priority">
+            <value>2 - Should Have</value>
+        </field>
+        <field name="State">
+            <value>Ready For Test</value>
+        </field>
+        <field name="Story points"/>
+        <field name="Assignee">
+            <value>efauviaux</value>
+        </field>
+        <field name="Sprints">
+            <value>R11-Various</value>
+        </field>
+        <field name="Ideal days"/>
+        <field name="numberInProject">
+            <value>8</value>
+        </field>
+        <field name="summary">
+            <value>Search result</value>
+        </field>
+        <field name="description">
+            <value>Today if you search 'Yogonut' there is no result on hellocrowd.be. When you do the same on Ulule you get the Yo!gonut project as a result.
+
+Can we make our search engine less strickt to also show a result as soon as a part of the word matches?
+
+
+
+Search should searhc in the title and the body and should not be exact.</value>
+        </field>
+        <field name="created">
+            <value>1493213721051</value>
+        </field>
+        <field name="updated">
+            <value>1493214038292</value>
+        </field>
+        <field name="reporterName">
+            <value>aroba</value>
+        </field>
+        <field name="updaterName">
+            <value>aroba</value>
+        </field>
+        <field name="permittedGroup">
+            <value>All Users</value>
+        </field>
+    </issue>
+    <issue>
+        <field name="Type">
+            <value>Story</value>
+        </field>
+        <field name="Priority">
+            <value>2 - Should Have</value>
+        </field>
+        <field name="State">
+            <value>Ready For Dev</value>
+        </field>
+        <field name="Story points"/>
+        <field name="Assignee">
+            <value>kurt</value>
+        </field>
+        <field name="Sprints">
+            <value>R11-Various</value>
+        </field>
+        <field name="Ideal days"/>
+        <field name="numberInProject">
+            <value>9</value>
+        </field>
+        <field name="summary">
+            <value>Site synch testing</value>
+        </field>
+        <field name="created">
+            <value>1493213782724</value>
+        </field>
+        <field name="updated">
+            <value>1493214054433</value>
+        </field>
+        <field name="reporterName">
+            <value>aroba</value>
+        </field>
+        <field name="updaterName">
+            <value>aroba</value>
+        </field>
+        <field name="permittedGroup">
+            <value>All Users</value>
+        </field>
+    </issue>
+    <issue>
+        <field name="Type">
+            <value>Feature</value>
+        </field>
+        <field name="Priority">
+            <value>2 - Should Have</value>
+        </field>
+        <field name="State">
+            <value>Not Done</value>
+        </field>
+        <field name="Story points"/>
+        <field name="Assignee"/>
+        <field name="Sprints">
+            <value>R11-Various</value>
+        </field>
+        <field name="Ideal days"/>
+        <field name="numberInProject">
+            <value>10</value>
+        </field>
+        <field name="summary">
+            <value>Various</value>
+        </field>
+        <field name="created">
+            <value>1493213837944</value>
+        </field>
+        <field name="updated">
+            <value>1493275825785</value>
+        </field>
+        <field name="reporterName">
+            <value>aroba</value>
+        </field>
+        <field name="updaterName">
+            <value>aroba</value>
+        </field>
+        <field name="permittedGroup">
+            <value>All Users</value>
+        </field>
+    </issue>
+</issues>
